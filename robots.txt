@@ -1,4 +1,0 @@
-Sitemap: https://ieeecsvit.com
-
-User-agent: *
-Disallow: /api
