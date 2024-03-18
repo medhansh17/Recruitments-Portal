@@ -1,12 +1,14 @@
 import localFont from "next/font/local";
-import { Inter } from "next/font/google";
+import {Roboto} from "next/font/google";
 
-export const sfPro = localFont({
-  src: "./SF-Pro-Display-Medium.otf",
-  variable: "--font-sf",
+export const striger = localFont({
+  src: "./STRIGER.otf",
+  variable: "--font-striger",
 });
 
-export const inter = Inter({
-  variable: "--font-inter",
+export const roboto = Roboto({
+  weight: ["400", "700"],
   subsets: ["latin"],
+  display: "swap",
+  variable: "--font-roboto",
 });
