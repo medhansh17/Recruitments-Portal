@@ -14,9 +14,9 @@ export default function ScrollIndicator() {
           alt="scroll-indicator" 
           width={50} 
           height={50} 
-          onClick={() => window.scrollTo({ top:100, behavior: "smooth" })}
+          onClick={() => window.scrollTo({ top: window.scrollY + window.innerHeight, behavior: "smooth" })}
           onMouseOver={() => setOrientation(false)}
-            onMouseOut={() => setOrientation(true)}
+          onMouseOut={() => setOrientation(true)}
         />
       </div>
     );
