@@ -21,7 +21,7 @@ const config: Config = {
       },
       fontFamily: {
         "striger": ["striger", "sans-serif"],
-
+        "sarpanch": "var(--font-sarpanch)",
     },
   },
   plugins: [],
