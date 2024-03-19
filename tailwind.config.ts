@@ -24,7 +24,7 @@ const config: Config = {
         sarpanch: "var(--font-sarpanch)",
       },
       dropShadow: {
-        xl: " 1px 1px 4px #FF0DF5",
+        xl: " 4px 2px 10px #FF0DF5",
       },
     },
     plugins: [],
