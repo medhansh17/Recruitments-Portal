@@ -1,6 +1,6 @@
 
 export default function Welcome(){
-    return <section className="h-screen flex flex-col justify-center items-center">
+    return <section className="hidden md:flex h-screen  flex-col justify-center items-center">
         <div className="flex flex-row justify-center items-center w-3/4">
             <img src="/graphics/left-lines.svg" alt="left-lines" className="w-1/3   h-1/10"/>
                 <h1 className="text-6xl text-center text-white mx-5 font-striger">Welcome</h1>
