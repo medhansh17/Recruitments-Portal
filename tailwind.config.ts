@@ -17,13 +17,17 @@ const config: Config = {
         "main-bg": "#150B23",
         "main-pink": "#FF0DF5",
         "main-blue": "#6117ab",
-        "main-grey": "#363333"
+        "main-grey": "#363333",
       },
       fontFamily: {
-        "striger": ["striger", "sans-serif"],
-        "sarpanch": "var(--font-sarpanch)",
+        striger: ["striger", "sans-serif"],
+        sarpanch: "var(--font-sarpanch)",
+      },
+      dropShadow: {
+        xl: " 1px 1px 4px #FF0DF5",
+      },
     },
+    plugins: [],
   },
-  plugins: [],
-}};
+};
 export default config;
