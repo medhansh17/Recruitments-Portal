@@ -11,11 +11,11 @@ export default function Nav(){
     const pathname = usePathname();
 
     return (
-    <nav className="flex flex-row justify-center items-center fixed py-5 w-full">
-        <div id="logo" className='size-16 fixed left-5'>
+    <nav className=" flex flex-row justify-center items-center fixed py-5 w-full">
+        <div id="logo" className='size-16 fixed left-5 top-5'>
             <Image src="/logo.svg" alt="IEEECS Logo" width={100} height={100}/>
         </div>
-        <ul className='flex flex-row justify-center items-center font-striger px-4 py-2 bg-main-grey bg-opacity-40 rounded-full'>
+        <ul className=' hidden md:flex flex-row justify-center items-center font-striger px-4 py-2 bg-main-grey bg-opacity-40 rounded-full'>
             <Navlink target="/" text="Home" active={pathname === '/'}/>
             <Navlink target="/team" text="Team" active={pathname === '/team'}/>
             <Navlink target="/domains" text="Domains" active={pathname === '/domains'}/>
