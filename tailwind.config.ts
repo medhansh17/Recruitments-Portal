@@ -23,6 +23,9 @@ const config: Config = {
         "striger": ["striger", "sans-serif"],
 
     },
+    dropShadow:{
+      '3xl': '0 35px 35px rgba(97, 23, 171, 0.25)'
+    }
   },
   plugins: [],
 }};
