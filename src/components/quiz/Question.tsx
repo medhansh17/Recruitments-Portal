@@ -49,7 +49,7 @@ const Question = ({ questionNumber, ansArr, setAnsArr, setQuestionNumber }) => {
           questionNumber={questionNumber}
         />
       )}
-      <div className="flex justify-between mx-8 my-2 font-striger text-lg">
+      <div className="flex justify-between mx-8 my-4 font-striger text-lg">
         <button
           disabled={questionNumber === 1}
           onClick={() => {

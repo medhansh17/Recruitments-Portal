@@ -18,9 +18,9 @@ const page = () => {
   ));
   console.log(ansArr);
   return (
-    <main className="min-h-screen text-white mx-20 flex flex-col justify-center py-10">
+    <main className="min-h-screen text-white mx-10 sm:mx-20 flex flex-col justify-center py-10">
      <Question questionNumber={questionNumber} ansArr={ansArr} setAnsArr={setAnsArr} setQuestionNumber={setQuestionNumber}/>
-      <div className="flex justify-around">{questionsArray}</div>
+      <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-10 text-center gap-4">{questionsArray}</div>
     </main>
   );
 };
