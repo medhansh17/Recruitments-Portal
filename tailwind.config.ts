@@ -21,7 +21,7 @@ const config: Config = {
       },
       fontFamily: {
         "striger": ["striger", "sans-serif"],
-
+        "sarpanch": "var(--font-sarpanch)",
     },
     dropShadow:{
       '3xl': '0 35px 35px rgba(97, 23, 171, 0.25)'
