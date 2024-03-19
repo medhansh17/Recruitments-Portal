@@ -53,16 +53,16 @@ const Question = ({ questionNumber, ansArr, setAnsArr, setQuestionNumber }) => {
         <button
           disabled={questionNumber === 1}
           onClick={() => {
-            setQuestionNumber((prev) => prev - 1);
+            setQuestionNumber((prev:number) => prev - 1);
           }}
         >
           prev
         </button>
-        {questionNumber === 10 ? (
+        {questionNumber !== 10 ? (
           <button
             disabled={questionNumber === 10}
             onClick={() => {
-              setQuestionNumber((prev) => prev + 1);
+              setQuestionNumber((prev:number) => prev + 1);
             }}
           >
             next
