@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
-export default function Button() {
+export default function Button({text}) {
   const Ref = useRef(null);
   const inView = useInView(Ref, { amount: 0.5, once: false });
   const animationOnViewLeft = {
@@ -79,9 +79,9 @@ export default function Button() {
         variants={animationOnViewText}
         initial="hidden"
         animate={inView ? "visible" : "hidden"}
-        className="text-main-pink drop-shadow-xl text-2xl sm:text-[1.75rem] inline-block absolute left-[50%] translate-x-[-50%] w-full text-center group-hover:scaleY-110 duration-[300ms] ease-in"
+        className="text-main-pink drop-shadow-xl text-2xl sm:text-[1.75rem] inline-block absolute left-[50%] translate-x-[-50%] w-full text-center group-hover:scaleY-110 duration-[300ms] ease-in font-bold  "
       >
-        JOIN THE TEAM
+        {text}
         <span className="absolute rounded-full bg-main-pink w-[45px] h-[45px] blur-[55px] right-[50%] translate-x-[50%]"></span>
       </motion.p>
       <motion.div
