@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
-export default function Button({text}) {
+export default function Button(props: { onClick: Function; text: string }) {
   const Ref = useRef(null);
   const inView = useInView(Ref, { amount: 0.5, once: false });
   const animationOnViewLeft = {
@@ -61,7 +61,8 @@ export default function Button({text}) {
   return (
     <div
       ref={Ref}
-      className="sm:w-[350px] sm:h-[120px] w-[300px] h-[90px] flex items-center bg-[url('/button-background.svg')] bg-contain bg-center bg-no-repeat z-10 relative group hover:scaleX-105 "
+      onClick={() => props.onClick()}
+      className="sm:w-[350px] sm:h-[120px] w-[300px] h-[90px] flex items-center bg-[url('/button-background.svg')] bg-contain bg-center bg-no-repeat z-10 relative group hover: hover:cursor-pointer "
     >
       <motion.div
         variants={animationOnViewLeft}
@@ -79,16 +80,16 @@ export default function Button({text}) {
         variants={animationOnViewText}
         initial="hidden"
         animate={inView ? "visible" : "hidden"}
-        className="text-main-pink drop-shadow-xl text-2xl sm:text-[1.75rem] inline-block absolute left-[50%] translate-x-[-50%] w-full text-center group-hover:scaleY-110 duration-[300ms] ease-in font-bold  "
+        className="text-main-pink drop-shadow-xl text-2xl sm:text-[1.75rem]  absolute left-[50%] translate-x-[-50%] w-full text-center group-hover:scaleY-110 duration-[300ms] ease-in"
       >
-        {text}
+        {props.text}
         <span className="absolute rounded-full bg-main-pink w-[45px] h-[45px] blur-[55px] right-[50%] translate-x-[50%]"></span>
       </motion.p>
       <motion.div
         variants={animationOnViewRight}
         initial="hidden"
         animate={inView ? "visible" : "hidden"}
-        className="z-[-1] w-[40%] h-[98%] bg-[url('/button-white-right.svg')] bg-contain bg-center bg-no-repeat absolute right-0 group-hover:translate-x-2 duration-[300ms] ease-in"
+        className="z-[-1] w-[40%] h-[98%] bg-[url('/button-white-right.svg')] bg-contain bg-center bg-no-repeat absolute right-0 group-hover:translate-x-2 duration-[300ms] ease-in "
       ></motion.div>
       <motion.div
         variants={animationOnViewRight}
