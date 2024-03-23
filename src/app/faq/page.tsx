@@ -1,7 +1,31 @@
 "use client";
-import FaqCard from "@/components/faqcard";
+import Carousel from "@/components/carousel";
 import Image from "next/image";
 export default function Faq(){
+
+    const FAQs:[{
+      question:string,
+      answer:string
+    }] = [{
+      question:'WHat is IEEECS',
+      answer:"A 1 chapter"
+
+    },
+    {
+      question:'WHat is IEEECS',
+      answer:"A 2 chapter"
+
+    },
+    {
+      question:'WHat is IEEECS',
+      answer:"A 3 chapter"
+
+    },
+    {
+      question:'WHat is IEEECS',
+      answer:"A chapter"
+    }
+  ]
 
     return <section className="flex flex-col w-full items-center justify-center h-screen md:pt-16">
         <div className="flex flex-row items-center justify-center ">
@@ -27,13 +51,6 @@ export default function Faq(){
 
           </div>
         </div>
-        <div className="flex flex-col md:flex-row">
-            <FaqCard question="What is IEEECS?" answer="A chapter A chapterA chapterA chapterA chapterA chapter "/>
-            <FaqCard question="What is IEEECS?" answer="A chapter A chapterA chapterA chapterA chapterA chapter "/>
-            <FaqCard question="What is IEEECS?" answer="A chapter A chapterA chapterA chapterA chapterA chapter "/>
-            <FaqCard question="What is IEEECS?" answer="A chapter A chapterA chapterA chapterA chapterA chapter "/>
-
-        </div>
-
+        <Carousel questions={FAQs}/>
     </section>
 }
