@@ -17,8 +17,8 @@ export default function Nav(){
         </div>
         <ul className=' hidden md:flex flex-row justify-center items-center font-striger px-4 py-2 bg-main-grey bg-opacity-40 rounded-full'>
             <Navlink target="/" text="Home" active={pathname === '/'}/>
-            <Navlink target="/team" text="Team" active={pathname === '/team'}/>
-            <Navlink target="/domains" text="Domains" active={pathname === '/domains'}/>
+            <Navlink target="/teams" text="Teams" active={pathname === '/teams'}/>
+            <Navlink target="/faq" text="FAQS" active={pathname === '/faq'}/>
             <Navlink target="/contact" text="Contact" active={pathname === '/contact'}/>
             <Link href="https://discord.gg/swF4utKTk4"><li className="text-white text-2xl mx-5"><img src="/discordlogo.svg"></img></li></Link>
         </ul>

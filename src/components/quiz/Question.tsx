@@ -9,7 +9,7 @@ const Option = ({ text, ansArr, setAnsArr, questionNumber }) => {
         text === ansArr[questionNumber - 1]
           ? "border-4 border-main-pink"
           : "border-2"
-      } my-10 cursor-pointer`}
+      } my-6 cursor-pointer`}
       onClick={() => {
         setAnsArr((prev: string[]) => {
           const newArr = [...prev];
