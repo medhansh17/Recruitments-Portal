@@ -47,7 +47,7 @@ export default function Carousel({ questions }: CarouselProps) {
         onClick={handlePrevClick}
         className={`${currentIndex < 4 ? 'hidden' : 'block'} fixed z-50 h-[60vh] flex items-center justify-center left-5`}
       >
-        <Image
+        <img
           src="/graphics/scrollindicator.svg"
           alt="scroll-indicator"
           width={50}
@@ -64,7 +64,7 @@ export default function Carousel({ questions }: CarouselProps) {
         onClick={handleNextClick}
         className={`${currentIndex >= questions.length - 4 ? 'hidden' : 'block'} fixed z-50 h-[60vh] flex items-center justify-center right-5`}
       >
-        <Image
+        <img
           src="/graphics/scrollindicator.svg"
           alt="scroll-indicator"
           width={50}

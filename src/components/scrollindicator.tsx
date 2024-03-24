@@ -32,7 +32,7 @@ export default function ScrollIndicator() {
       animate={bounceAnimation}
       className="fixed bottom-5 w-full flex justify-center items-center z-"
     >
-      <Image
+      <img
         src={
           orientation
             ? "/graphics/scrollindicator.svg"

@@ -5,6 +5,20 @@ import Button from "./button";
 import Header from "./header";
 import SubHeader from "./subdomain-header";
 
+const dropdownVariants = {
+  key: "div",
+  initial: { scaleY: 0 },
+  animate: {
+    scaleY: 1,
+    transition: { type: "spring", bounce: 0.35 },
+  },
+  exit: {
+    scaleY: 0,
+    transition: { when: "afterChildren" },
+  },
+  transition: { duration: 0.5, ease: [0.12, 0, 0.39, 0] },
+};
+
 export default function JoinTeam(props: {
   teamName: string;
   order: string;
@@ -16,6 +30,10 @@ export default function JoinTeam(props: {
     if (!isShown) document.body.style.overflow = "hidden";
     else document.body.style.overflow = "auto";
   };
+  useEffect(() => {
+    setIsShown(false);
+    document.body.style.overflow = "auto";
+  }, []);
   return (
     <>
       <div
@@ -30,11 +48,15 @@ export default function JoinTeam(props: {
       </div>
       <AnimatePresence>
         {isShown && (
-          <motion.div className="w-full h-screen bg-main-bg inset-0 flex  flex-col justify-around items-center fixed z-20">
-            {/* <Header title={props.teamName}/> */}
+          <motion.div
+            {...dropdownVariants}
+            className="w-full h-screen bg-main-bg inset-0 flex  flex-col justify-around items-center fixed z-20 origin-top"
+          >
             <div className="w-[95%] h-[70%] flex flex-row  justify-evenly items-center flex-wrap gap-x-[14%]">
               {props.titles.map((title) => (
-                <SubHeader key={title} title={title} />
+                <motion.div>
+                  <SubHeader key={title} title={title} />
+                </motion.div>
               ))}
             </div>
             <Button text="CONFIRM" onClick={onClick} />

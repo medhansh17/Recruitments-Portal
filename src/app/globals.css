@@ -6,3 +6,22 @@
   font-family: "striger";
   src: url("/fonts/STRIGER.otf");
 }
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #150B23;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #6117ab;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

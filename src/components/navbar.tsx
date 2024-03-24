@@ -14,7 +14,7 @@ export default function Nav() {
     >
       <div id="logo" className="size-16 fixed left-5 top-5">
         <Link href="/">
-          <Image src="/logo.svg" alt="IEEECS Logo" width={100} height={100} />
+          <img src="/logo.svg" alt="IEEECS Logo" width={100} height={100} />
         </Link>
       </div>
       <ul
@@ -32,7 +32,7 @@ export default function Nav() {
         />
         <Link href="https://discord.gg/swF4utKTk4">
           <li className="text-white text-2xl mx-5">
-            <Image src="/discordlogo.svg" alt="Discord Logo"></Image>
+            <img src="/discordlogo.svg" alt="Discord Logo"></img>
           </li>
         </Link>
       </ul>
