@@ -3,11 +3,13 @@ import { useState, useEffect } from "react";
 import Button from "./button";
 import Header from "./header";
 
-export default function JoinTeam(props: { teamName: string; order: string }) {
-  const [clicked, setClick] = useState(false);
-  useEffect(() => {
-    console.log(clicked);
-  }, [clicked]);
+type joinProps = {
+  teamName: string;
+  order: string;
+};
+
+export default function JoinTeam({teamName,order}:joinProps) {
+
   return (
     <div
       className={`flex ${

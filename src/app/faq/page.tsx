@@ -3,10 +3,10 @@ import Carousel from "@/components/carousel";
 import Image from "next/image";
 export default function Faq(){
 
-    const FAQs:[{
+    const FAQs:Array<{
       question:string,
       answer:string
-    }] = [{
+    }> = [{
       question:'WHat is IEEECS',
       answer:"A 1 chapter"
 
@@ -24,10 +24,22 @@ export default function Faq(){
     {
       question:'WHat is IEEECS',
       answer:"A chapter"
+    },
+    {
+      question:'WHat is IEEECS',
+      answer:"A chapter"
+    },
+    {
+      question:'WHat is IEEECS',
+      answer:"A chapter"
+    },
+    {
+      question:'WHat is IEEECS',
+      answer:"A chapter"
     }
   ]
 
-    return <section className="flex flex-col w-full items-center justify-center h-screen md:pt-16">
+    return <section className="flex flex-col w-screen items-center justify-center min-h-screen pt-16">
         <div className="flex flex-row items-center justify-center ">
           <div className="w-1/4 h-auto">
           <Image
