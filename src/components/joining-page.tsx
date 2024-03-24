@@ -54,8 +54,8 @@ export default function JoinTeam(props: {
           >
             <div className="w-[95%] h-[70%] flex flex-row  justify-evenly items-center flex-wrap gap-x-[14%]">
               {props.titles.map((title) => (
-                <motion.div>
-                  <SubHeader key={title} title={title} />
+                <motion.div key={title}>
+                  <SubHeader title={title} />
                 </motion.div>
               ))}
             </div>
