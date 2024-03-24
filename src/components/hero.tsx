@@ -1,4 +1,3 @@
-import Image from "next/image";
 
 export default function Hero() {
   return (
@@ -22,10 +21,10 @@ export default function Hero() {
         </div>
         <h1 className="text-6xl md:text-8xl text-center">UNKNOWN</h1>
       </div>
-      <div className="hidden md:visible flex flex-col items-center justify-center font-sarpanch text-2xl my-10">
+      <div className=" md:visible flex flex-col items-center justify-center font-sarpanch text-2xl my-10">
         Introducing the best chapter
       </div>
-      <div className=" hidden md:visible flex flex-row items-center justify-center font-sarpanch">
+      <div className="  md:visible flex flex-row items-center justify-center font-sarpanch">
         Where innovation meets technology: we forge tech <br></br>
         that transcends from ordinary: into realms of the unknown
       </div>
