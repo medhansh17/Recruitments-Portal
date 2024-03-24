@@ -2,13 +2,18 @@ import { useState } from "react";
 import round1 from "@/constants/round1.json";
 import Input from "./Input";
 
-const Option = ({ text, ansArr, setAnsArr, questionNumber }) => {
+interface OptionProps {
+  text: string;
+  ansArr: string[];
+  setAnsArr: React.Dispatch<React.SetStateAction<string[]>>;
+  questionNumber: number;
+}
+
+const Option = ({ text, ansArr, setAnsArr, questionNumber }: OptionProps) => {
   return (
     <li
       className={`p-2 bg-[#522481] bg-opacity-50 rounded-xl backdrop-blur-sm border-main-blue border-2 ${
-        text === ansArr[questionNumber - 1]
-          ? "border-4 border-main-pink"
-          : "border-2"
+        text === ansArr[questionNumber - 1] ? "border-4 border-main-pink" : "border-2"
       } my-6 cursor-pointer`}
       onClick={() => {
         setAnsArr((prev: string[]) => {
@@ -23,9 +28,27 @@ const Option = ({ text, ansArr, setAnsArr, questionNumber }) => {
   );
 };
 
-const Question = ({ questionNumber, ansArr, setAnsArr, setQuestionNumber }) => {
+interface QuestionProps {
+  questionNumber: number;
+  ansArr: string[];
+  setAnsArr: React.Dispatch<React.SetStateAction<string[]>>;
+  setQuestionNumber: React.Dispatch<React.SetStateAction<number>>;
+}
+
+interface QuestionData {
+  question: string;
+  options?: string[];
+}
+
+const Question = ({
+  questionNumber,
+  ansArr,
+  setAnsArr,
+  setQuestionNumber,
+}: QuestionProps) => {
   const [option, setOption] = useState<number>(1);
-  const question = round1[questionNumber - 1];
+  const question: QuestionData = round1[questionNumber - 1];
+
   const options = question.options?.map((option, idx) => (
     <Option
       key={idx}
@@ -35,6 +58,7 @@ const Question = ({ questionNumber, ansArr, setAnsArr, setQuestionNumber }) => {
       questionNumber={questionNumber}
     />
   ));
+
   return (
     <div className="QnA">
       <h1 className="font-bold font-striger tracking-wider text-xl">
@@ -53,7 +77,7 @@ const Question = ({ questionNumber, ansArr, setAnsArr, setQuestionNumber }) => {
         <button
           disabled={questionNumber === 1}
           onClick={() => {
-            setQuestionNumber((prev:number) => prev - 1);
+            setQuestionNumber((prev: number) => prev - 1);
           }}
         >
           prev
@@ -62,7 +86,7 @@ const Question = ({ questionNumber, ansArr, setAnsArr, setQuestionNumber }) => {
           <button
             disabled={questionNumber === 10}
             onClick={() => {
-              setQuestionNumber((prev:number) => prev + 1);
+              setQuestionNumber((prev: number) => prev + 1);
             }}
           >
             next
@@ -70,7 +94,7 @@ const Question = ({ questionNumber, ansArr, setAnsArr, setQuestionNumber }) => {
         ) : (
           <button
             onClick={() => {
-              //send data to server
+              // send data to server
             }}
           >
             Submit

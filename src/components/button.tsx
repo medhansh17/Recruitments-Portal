@@ -3,7 +3,11 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
-export default function Button({text}) {
+type ButtonProps = {
+  text: string;
+};
+
+export default function Button({text}:ButtonProps) {
   const Ref = useRef(null);
   const inView = useInView(Ref, { amount: 0.5, once: false });
   const animationOnViewLeft = {

@@ -1,14 +1,84 @@
-import FaqCard from "./faqcard"
+import { useState } from 'react';
+import FaqCard from "./faqcard";
+import Image from 'next/image';
+import Question from './quiz/Question';
+import { motion ,Variants } from "framer-motion";
 
 
-export default function Carousel(props:{questions:[{
-    question:string,
-    answer:string
-  }]}){
-    return <section className="flex flex-col md:flex-row">
-    {props.questions.map((faq)=>{
-        return <FaqCard question={faq.question} answer={faq.answer}/>
-    })}
+type Question = {
+  question: string;
+  answer: string;
+};
+
+type CarouselProps = {
+  questions: Question[];
+
+};
+
+const bounceAnimation:Variants = {
+  bounce: {
+    x: [0, 20, 0],
+    transition: {
+      duration: 2,
+      repeat: Infinity,
+      repeatType:"reverse" ,
+      ease: "easeInOut",
+    },
+  },
+};
+
+export default function Carousel({ questions }: CarouselProps) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  
+  const handleNextClick = () => {
+    setCurrentIndex(prevIndex => prevIndex + 4);
+  };
+
+  const handlePrevClick = () => {
+    setCurrentIndex(prevIndex => prevIndex - 4);
+  }
+
+  return (
+    <>
+      <section className="hidden md:flex md:flex-row">
+      <motion.button
+        animate="bounce"
+        variants={bounceAnimation}
+        onClick={handlePrevClick}
+        className={`${currentIndex < 4 ? 'hidden' : 'block'} fixed z-50 h-[60vh] flex items-center justify-center left-5`}
+      >
+        <Image
+          src="/graphics/scrollindicator.svg"
+          alt="scroll-indicator"
+          width={50}
+          height={50}
+          style={{ transform: 'rotate(90deg)' }}
+        />
+      </motion.button>        
+      {questions.slice(currentIndex, currentIndex + 4).map((faq, index) => (
+                <FaqCard key={index} indx={(currentIndex + index + 1).toString()} question={faq.question} answer={faq.answer} />
+              ))}
+      <motion.button
+        animate="bounce"
+        variants={bounceAnimation}
+        onClick={handleNextClick}
+        className={`${currentIndex >= questions.length - 4 ? 'hidden' : 'block'} fixed z-50 h-[60vh] flex items-center justify-center right-5`}
+      >
+        <Image
+          src="/graphics/scrollindicator.svg"
+          alt="scroll-indicator"
+          width={50}
+          height={50}
+          style={{ transform: 'rotate(270deg)' }}
+        />
+      </motion.button>      
     </section>
 
+      <section className="flex flex-col md:hidden w-screen">
+      {questions.map((faq, index) => (
+        <FaqCard key={index} indx={(index+1).toString()} question={faq.question} answer={faq.answer} />
+      ))}
+    </section>
+    </>
+  );
 }
