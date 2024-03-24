@@ -1,10 +1,12 @@
+import Image from "next/image";
+
 export default function Hero() {
   return (
     <section className="flex flex-col items-center justify-center h-screen w-full text-white pt-10">
       <div className="flex flex-col items-center justify-center font-striger my-10">
         <h1 className="text-6xl md:text-8xl text-center ">TRIUMPH</h1>
         <div className="flex flex-row items-center justify-center">
-          <img
+          <Image
             src="/graphics/left-lines.svg"
             alt="left-lines"
             className="w-1/4    h-auto"
@@ -12,7 +14,7 @@ export default function Hero() {
           <h2 className="text-2xl md:text-4xl text-center text-white mx-5 font-sarpanch font-bold">
             IN THE
           </h2>
-          <img
+          <Image
             src="/graphics/right-lines.svg"
             alt="right-lines"
             className="w-1/4 h-auto"
