@@ -32,7 +32,7 @@ export default function Nav() {
         />
         <Link href="https://discord.gg/swF4utKTk4">
           <li className="text-white text-2xl mx-5">
-            <Image src="/discordlogo.svg" alt="Discord Logo"></Image>
+            <img src="/discordlogo.svg" alt="Discord Logo"></img>
           </li>
         </Link>
       </ul>

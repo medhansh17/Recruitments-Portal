@@ -1,9 +1,88 @@
-"use client";
+'use client';
 
 import Image from "next/image";
 import Button from "@/components/button";
+import {firebaseConfig} from "@/firebase.config"
+import { initializeApp } from "firebase/app";
+import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, User } from "firebase/auth";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+
+function validateEmail(email:string | null) {
+  //email must end with vitstudent.ac.in
+  if(typeof email === "undefined" || email === null) return false;
+  if (email.endsWith("@vitstudent.ac.in")) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 
 export default function Login() {
+  const router = useRouter();
+
+  useEffect(() => {
+    // Check if the router is available
+    if (!router) return;
+
+    // Your router-related logic here
+  }, [router]);
+
+
+  function verifyEmailinDB(user:User){
+      axios.post('https://recruitments-portal-backend.vercel.app/check_user', {
+        email: user.email
+      }).then((response) => {
+        if(response.status === 200){
+          //create cookie of user email and response.data.accessToken
+          document.cookie = `email=${user.email}; path=/`
+          document.cookie = `token=${response.data.accessToken}; path=/`
+          router.push("/")
+          
+      }
+      else{
+        alert("Email not registered for IEEE-CS")
+      }
+    })
+      .catch((error) => {
+        alert(error.message)
+      })
+  }
+
+
+
+  function handleLogin(){
+    const app = initializeApp(firebaseConfig);
+    const provider = new GoogleAuthProvider();
+    provider.setCustomParameters(
+      {
+        hd: "vitstudent.ac.in",
+        prompt: "select_account"
+      }
+    )
+    const auth = getAuth(app);
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const credential:any = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        const user = result.user;
+        if(!validateEmail(user.email)){
+          alert("Please login with your VIT email")
+          signOut(auth);
+        }
+
+        verifyEmailinDB(user);
+
+      }).catch((error) => {
+        // Handle Errors here.
+        const errorMessage = error.message;
+        alert(errorMessage)
+        // ...
+      });
+
+  }
   return (
     <div className="w-screen  h-screen md:h-screen flex flex-col items-center justify-center">
       <div className="w-[80vw] md:w-screen flex flex-col items-center justify-between">
@@ -17,7 +96,7 @@ export default function Login() {
             marginBottom: "10vh",
           }}
         />
-        <Button text="Continue with google" onClick={() => {}} />
+        <Button text="Continue with google" onClick={handleLogin} />
       </div>
     </div>
   );
