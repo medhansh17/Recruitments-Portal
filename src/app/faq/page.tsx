@@ -42,7 +42,7 @@ export default function Faq(){
     return <section className="flex flex-col w-screen items-center justify-center min-h-screen pt-16">
         <div className="flex flex-row items-center justify-center ">
           <div className="w-1/4 h-auto">
-          <Image
+          <img
             src="/graphics/left-lines.svg"
             alt="left-lines"
             width={500}
@@ -54,7 +54,7 @@ export default function Faq(){
             FAQ
           </h2>
           <div className="w-1/4 h-auto">
-          <Image
+          <img
             src="/graphics/right-lines.svg"
             alt="left-lines"
             width={500}
