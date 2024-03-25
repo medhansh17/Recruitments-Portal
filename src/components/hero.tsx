@@ -24,7 +24,7 @@ export default function Hero() {
       <div className=" md:visible flex flex-col items-center justify-center font-sarpanch text-2xl my-10">
         Introducing the best chapter
       </div>
-      <div className="  md:visible flex flex-row items-center justify-center font-sarpanch">
+      <div className="  md:visible flex flex-row items-center justify-center font-sarpanch text-center">
         Where innovation meets technology: we forge tech <br></br>
         that transcends from ordinary: into realms of the unknown
       </div>
