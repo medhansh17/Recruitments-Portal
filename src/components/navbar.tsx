@@ -1,13 +1,10 @@
 "use client";
-
-import Image from "next/image";
 import Link from "next/link";
 import Navlink from "./navlink";
 import { usePathname } from "next/navigation";
 
 export default function Nav() {
   const pathname = usePathname();
-
   return (
     <nav
       className={`flex flex-row justify-center items-center fixed py-5 w-full `}
@@ -25,6 +22,11 @@ export default function Nav() {
         <Navlink target="/" text="Home" active={pathname === "/"} />
         <Navlink target="/teams" text="Teams" active={pathname === "/teams"} />
         <Navlink target="/faq" text="FAQS" active={pathname === "/faq"} />
+        <Navlink
+          target="/dashboard"
+          text="Dashboard"
+          active={pathname === "/dashboard"}
+        />
         <Navlink
           target="/contact"
           text="Contact"

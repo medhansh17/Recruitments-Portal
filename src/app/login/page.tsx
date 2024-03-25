@@ -1,6 +1,5 @@
 'use client';
 
-import Image from "next/image";
 import Button from "@/components/button";
 import {firebaseConfig} from "@/firebase.config"
 import { initializeApp } from "firebase/app";
@@ -76,10 +75,8 @@ export default function Login() {
         verifyEmailinDB(user);
 
       }).catch((error) => {
-        // Handle Errors here.
         const errorMessage = error.message;
         alert(errorMessage)
-        // ...
       });
 
   }
