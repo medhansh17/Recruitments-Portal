@@ -37,7 +37,7 @@ export default function Login() {
         if(response.status === 200){
           //create cookie of user email and response.data.accessToken
           document.cookie = `email=${user.email}; path=/`
-          document.cookie = `token=${response.data.accessToken}; path=/`
+          document.cookie = `accessToken=${response.data.accessToken}; path=/`
           router.push("/")
           
       }
