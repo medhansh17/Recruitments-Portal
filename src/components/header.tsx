@@ -5,7 +5,7 @@ import { motion, useInView } from "framer-motion";
 
 export default function Header(props: { title: string }) {
   const Ref = useRef(null);
-  const inView = useInView(Ref, { amount: 0.5, once: false });
+  const inView = useInView(Ref, { amount: 0.5, once: true });
   const animationOnViewLeft = {
     hidden: {
       scaleX: 0,
