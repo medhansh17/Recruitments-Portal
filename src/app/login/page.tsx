@@ -37,7 +37,7 @@ export default function Login() {
         if(response.status === 200){
           //create cookie of user email and response.data.accessToken
           document.cookie = `email=${user.email}; path=/`
-          document.cookie = `token=${response.data.accessToken}; path=/`
+          document.cookie = `accessToken=${response.data.accessToken}; path=/`
           router.push("/")
           
       }
@@ -93,7 +93,7 @@ export default function Login() {
             marginBottom: "10vh",
           }}
         />
-        <Button text="Continue with google" onClick={handleLogin} />
+        <Button text="Sign in with google" onClick={handleLogin} />
       </div>
     </div>
   );

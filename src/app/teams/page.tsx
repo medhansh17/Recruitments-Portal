@@ -1,6 +1,7 @@
 import JoinTeam from "@/components/joining-page";
 import ScrollIndicator from "@/components/scrollindicator";
 import Button from "@/components/button";
+import Link from "next/link";
 
 export default function Teams() {
   return (
@@ -21,7 +22,10 @@ export default function Teams() {
         titles={["UI/UX", "GRAPHICS", "VIDEO"]}
       />
       <div className=" flex justify-center items-center mb-36">
+      <Link href="/dashboard">
       <Button text="Go to Dashboard" />
+
+      </Link>
 
       </div>
       <ScrollIndicator />
