@@ -24,16 +24,45 @@ export default function JoinTeam(props: {
   order: string;
   titles: string[];
 }) {
+  const [selectedDomains, setSelectedDomains] = useState<string[]>([]);
   const [isShown, setIsShown] = useState(false);
-  const onClick = () => {
+
+  const onClick = (teamName: string) => {
     setIsShown(!isShown);
     if (!isShown) document.body.style.overflow = "hidden";
     else document.body.style.overflow = "auto";
+    console.log(teamName, ":", [selectedDomains[0], selectedDomains[1]]);
   };
+  const handleClick = (props: { title: string }) => {
+    setSelectedDomains((prevSelected: string[]) => {
+      if (prevSelected.includes(props.title)) {
+        const element = document.getElementById(props.title);
+        if (element) {
+          element.classList.remove("text-main-pink");
+          element.classList.add("text-white");
+        }
+        return prevSelected.filter((item) => item !== props.title);
+      }
+      if (prevSelected.length === 2) {
+        return prevSelected;
+      } else {
+        const element = document.getElementById(props.title);
+        if (element) {
+          element.classList.remove("text-white");
+          element.classList.add("text-main-pink");
+        }
+        return [...prevSelected, props.title];
+      }
+    });
+  };
+  useEffect(() => {
+    console.log(selectedDomains);
+  }, [selectedDomains]);
   useEffect(() => {
     setIsShown(false);
     document.body.style.overflow = "auto";
   }, []);
+
   return (
     <>
       <div
@@ -44,7 +73,12 @@ export default function JoinTeam(props: {
         }  justify-evenly items-center h-screen w-full`}
       >
         <Header title={props.teamName} />
-        <Button text="JOIN THE TEAM" onClick={onClick} />
+        <Button
+          text="JOIN THE TEAM"
+          onClick={() => {
+            onClick(props.teamName);
+          }}
+        />
       </div>
       <AnimatePresence>
         {isShown && (
@@ -54,12 +88,23 @@ export default function JoinTeam(props: {
           >
             <div className="w-[95%] h-[70%] flex flex-row  justify-evenly items-center flex-wrap gap-x-[14%]">
               {props.titles.map((title) => (
-                <motion.div key={title}>
-                  <SubHeader title={title} />
+                <motion.div
+                  className="hover:cursor-pointer z-0"
+                  key={title}
+                  onClick={() => {
+                    handleClick({ title });
+                  }}
+                >
+                  <SubHeader title={title} id={title} />
                 </motion.div>
               ))}
             </div>
-            <Button text="CONFIRM" onClick={onClick} />
+            <Button
+              text="CONFIRM"
+              onClick={() => {
+                onClick(props.teamName);
+              }}
+            />
           </motion.div>
         )}
       </AnimatePresence>
