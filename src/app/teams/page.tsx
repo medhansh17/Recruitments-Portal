@@ -1,5 +1,6 @@
 import JoinTeam from "@/components/joining-page";
 import ScrollIndicator from "@/components/scrollindicator";
+import Button from "@/components/button";
 
 export default function Teams() {
   return (
@@ -12,13 +13,17 @@ export default function Teams() {
       <JoinTeam
         teamName="Tech"
         order="2"
-        titles={["APP", "WEB", "AI/ML", "RnD", "DEVOPS"]}
+        titles={["APP", "WEB", "AI/ML", "R&D", "DEVOPS"]}
       />
       <JoinTeam
         teamName="Design"
         order="1"
         titles={["UI/UX", "GRAPHICS", "VIDEO"]}
       />
+      <div className=" flex justify-center items-center mb-36">
+      <Button text="Go to Dashboard" />
+
+      </div>
       <ScrollIndicator />
     </main>
   );

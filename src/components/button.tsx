@@ -2,7 +2,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
-export default function Button(props: { onClick: Function; text: string }) {
+export default function Button(props: { onClick?: Function; text: string }) {
   const Ref = useRef(null);
   const inView = useInView(Ref, { amount: 0.5, once: false });
   const animationOnViewLeft = {
@@ -66,7 +66,7 @@ export default function Button(props: { onClick: Function; text: string }) {
           transition: { duration: 0.5 },
         }}
         whileTap={{ scale: 0.9 }}
-        onClick={() => props.onClick()}
+        onClick={() => props.onClick && props.onClick()}
         className="sm:w-[350px] sm:h-[120px] w-[300px] h-[90px] flex items-center bg-[url('/button-background.svg')] bg-contain bg-center bg-no-repeat relative group hover: hover:cursor-pointer "
       >
         <motion.div
