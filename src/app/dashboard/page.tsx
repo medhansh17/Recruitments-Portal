@@ -16,6 +16,7 @@ type Quiz = {
   };
 
 export default function Dashboard(){
+
     const [techsub_pending,setTechsub_pending] = useState<string[]>([]);
     const [managementsub_pending,setManagementsub_pending] = useState<string[]>([]);
     const [designsub_pending,setDesignsub_pending] = useState<string[]>([]);
@@ -65,14 +66,15 @@ export default function Dashboard(){
                         ) : (
                         <>
                             {techsub_pending.map((sub, index) => (
-                            <Quizcard domain="Tech" key={index} subDomain={sub} completed={false} startQuiz={() => {}}/>
-                            ))}
+                                <Quizcard domain="Tech" key={index} subDomain={sub} completed={false} />                            
+                                ))}
                             {managementsub_pending.map((sub, index) => (
-                            <Quizcard domain="Management" key={index} subDomain={sub} completed={false} startQuiz={() => {}}/>
+                            <Quizcard domain="Management" key={index} subDomain={sub} completed={false} />
                             ))}
                             {designsub_pending.map((sub, index) => (
-                            <Quizcard domain="Design" key={index} subDomain={sub} completed={false} startQuiz={() => {}}/>
+                            <Quizcard domain="Design" key={index} subDomain={sub} completed={false}/>
                             ))}
+                        
                         </>
                         )}
                     </div>
@@ -81,7 +83,7 @@ export default function Dashboard(){
                 </div>
 
             </section>
-            <section className="md:h-[42vh] w-screen  md:px-20">
+            <section className="md:h-[42vh] w-sbcreen  md:px-20">
                 <div className=" h-full w-full flex flex-col justify-center">
                     <h1 className="ml-5 text-white text-center md:text-left font-striger text-3xl">Completed Quizzes</h1>
                     <div className="flex flex-col md:flex-row my-2">

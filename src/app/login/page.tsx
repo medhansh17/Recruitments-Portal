@@ -93,7 +93,7 @@ export default function Login() {
             marginBottom: "10vh",
           }}
         />
-        <Button text="Sign in with google" onClick={handleLogin} />
+        <Button text="Sign in with Google" onClick={handleLogin} />
       </div>
     </div>
   );
