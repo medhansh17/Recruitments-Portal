@@ -2,16 +2,26 @@
 import Link from "next/link";
 import Navlink from "./navlink";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
+import {useRouter} from "next/navigation"
 
 export default function Nav() {
   const pathname = usePathname();
+  const router = useRouter();
+
+  function handleSignout(){
+    document.cookie = "email=; path=/";
+    document.cookie = "accessToken=; path=/";
+    router.push("/login")
+  }
+
   return (
     <nav
       className={`flex flex-row justify-center items-center fixed py-5 w-full `}
     >
       <div id="logo" className="size-16 fixed left-5 top-5">
         <Link href="/">
-          <img src="/logo.svg" alt="IEEECS Logo" width={100} height={100} />
+          <Image src="/logo.svg" alt="IEEECS Logo" width={100} height={100} />
         </Link>
       </div>
       <ul
@@ -38,6 +48,10 @@ export default function Nav() {
           </li>
         </Link>
       </ul>
+      <div id="logout" className={`${pathname==='/login'?"hidden":"visible"} size-14 fixed right-5 top-5`} onClick={handleSignout}>
+          <Image src="/logout.png" alt="Logout button" width={100} height={100} />
+      </div>
+
     </nav>
   );
 }
