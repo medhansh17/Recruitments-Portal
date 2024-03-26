@@ -2,11 +2,12 @@
 
 import Button from "@/components/button";
 import {firebaseConfig} from "@/firebase.config"
-import { initializeApp } from "firebase/app";
-import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, User } from "firebase/auth";
+import {initializeApp} from "firebase/app";
+import {getAuth, GoogleAuthProvider, signInWithPopup, signOut, User} from "firebase/auth";
 import axios from "axios";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import {useRouter} from "next/navigation";
+import {useEffect, useState} from "react";
+import Loader from "@/components/loader";
 
 function validateEmail(email:string | null) {
   //email must end with vitstudent.ac.in
@@ -21,6 +22,8 @@ function validateEmail(email:string | null) {
 
 export default function Login() {
   const router = useRouter();
+
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     // Check if the router is available
@@ -38,21 +41,27 @@ export default function Login() {
           //create cookie of user email and response.data.accessToken
           document.cookie = `email=${user.email}; path=/`
           document.cookie = `accessToken=${response.data.accessToken}; path=/`
+            setLoading(false)
           router.push("/")
           
       }
       else{
         alert("Email not registered for IEEE-CS")
-      }
+            setLoading(false)
+
+        }
     })
       .catch((error) => {
         alert(error.message)
+          setLoading(false)
+
       })
   }
 
 
 
   function handleLogin(){
+    setLoading(true);
     const app = initializeApp(firebaseConfig);
     const provider = new GoogleAuthProvider();
     provider.setCustomParameters(
@@ -76,6 +85,7 @@ export default function Login() {
 
       }).catch((error) => {
         const errorMessage = error.message;
+        setLoading(false)
         alert(errorMessage)
       });
 
@@ -95,6 +105,7 @@ export default function Login() {
         />
         <Button text="Sign in with Google" onClick={handleLogin} />
       </div>
+        <Loader visibility={loading} />
     </div>
   );
 }

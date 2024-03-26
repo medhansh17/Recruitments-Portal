@@ -1,11 +1,12 @@
 "use client";
-import { Suspense, useEffect, useContext } from "react";
+import {Suspense, useContext, useEffect} from "react";
 import Loading from "../components/loading";
-import { AuthContext } from "@/contexts/auth.context";
+import {AuthContext} from "@/contexts/auth.context";
 import Hero from "@/components/hero";
 import ScrollIndicator from "@/components/scrollindicator";
 import Welcome from "@/components/welcome";
-import { useRouter } from "next/navigation";
+import {useRouter} from "next/navigation";
+import Button from "@/components/button";
 
 export default function Home() {
   const router = useRouter();
@@ -41,12 +42,19 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="min-h-screen">
-      <Suspense fallback={<Loading />}>
-        <Hero />
-        <Welcome />
-      </Suspense>
-      <ScrollIndicator />
-    </main>
+      <main className="min-h-screen snap-y snap-mandatory overflow-y-scroll overscroll-behavior-none">
+        <Suspense fallback={<Loading/>}>
+          <div className="snap-center h-screen">
+            <Hero/>
+          </div>
+          <div className="hidden md:visible snap-center h-screen">
+            <Welcome/>
+          </div>
+          <div className="snap-center h-[50vh] flex items-center justify-center">
+            <Button text={"Choose Domains"} onClick={() => router.push("/teams")}/>
+          </div>
+        </Suspense>
+        <ScrollIndicator/>
+      </main>
   );
 }
