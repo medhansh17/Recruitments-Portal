@@ -1,9 +1,11 @@
 "use client";
+
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import Button from "./button";
 import Header from "./header";
 import SubHeader from "./subdomain-header";
+import { GetDomains, PutDomains } from "@/api";
 
 const dropdownVariants = {
   key: "div",
@@ -18,49 +20,87 @@ const dropdownVariants = {
   },
   transition: { duration: 0.5, ease: [0.12, 0, 0.39, 0] },
 };
+interface Subdomain {
+  subdomain: string;
+  completed: boolean;
+}
+
+interface Data {
+  [key: string]: Subdomain[];
+}
+
+function getSubdomainsByKey(data: Data, key: string): string[] {
+  if (data.hasOwnProperty(key)) {
+    const subdomains: Subdomain[] = data[key];
+    return subdomains.map((subdomainObj) => subdomainObj.subdomain);
+  } else {
+    return [];
+  }
+}
 
 export default function JoinTeam(props: {
   teamName: string;
   order: string;
   titles: string[];
 }) {
+  interface Subdomain {
+    subdomain: string;
+    completed: boolean;
+  }
+
+  interface ResponseData {
+    [key: string]: Subdomain[];
+  }
+
   const [selectedDomains, setSelectedDomains] = useState<string[]>([]);
   const [isShown, setIsShown] = useState(false);
 
   const onClick = (teamName: string) => {
     setIsShown(!isShown);
-    if (!isShown) document.body.style.overflow = "hidden";
-    else document.body.style.overflow = "auto";
-    console.log(teamName, ":", [selectedDomains[0], selectedDomains[1]]);
+    if (typeof window !== "undefined") {
+      if (!isShown) document.body.style.overflow = "hidden";
+      else document.body.style.overflow = "auto";
+    }
   };
   const handleClick = (props: { title: string }) => {
     setSelectedDomains((prevSelected: string[]) => {
       if (prevSelected.includes(props.title)) {
-        const element = document.getElementById(props.title);
-        if (element) {
-          element.classList.remove("text-main-pink");
-          element.classList.add("text-white");
+        if (typeof window !== "undefined") {
+          const element = document.getElementById(props.title);
+          if (element) {
+            element.classList.remove("text-main-pink");
+            element.classList.add("text-white");
+          }
+          return prevSelected.filter((item) => item !== props.title);
         }
-        return prevSelected.filter((item) => item !== props.title);
       }
       if (prevSelected.length === 2) {
         return prevSelected;
       } else {
-        const element = document.getElementById(props.title);
-        if (element) {
-          element.classList.remove("text-white");
-          element.classList.add("text-main-pink");
+        if (typeof window !== "undefined") {
+          const element = document.getElementById(props.title);
+          if (element) {
+            element.classList.remove("text-white");
+            element.classList.add("text-main-pink");
+          }
         }
         return [...prevSelected, props.title];
       }
     });
   };
   useEffect(() => {
-    console.log(selectedDomains);
-  }, [selectedDomains]);
-  useEffect(() => {
     setIsShown(false);
     document.body.style.overflow = "auto";
+    // const fetchData = async () => {
+    //   try {
+    //     const responseData: ResponseData = await getDomains();
+    //     setSelectedDomains(getSubdomainsByKey(responseData, props.teamName));
+    //     console.log(selectedDomains);
+    //   } catch (error) {
+    //     console.error("Error fetching domains:", error);
+    //   }
+    // };
+    // fetchData();
   }, []);
 
   return (
@@ -103,6 +143,7 @@ export default function JoinTeam(props: {
               text="CONFIRM"
               onClick={() => {
                 onClick(props.teamName);
+                PutDomains(selectedDomains, props.teamName);
               }}
             />
           </motion.div>
