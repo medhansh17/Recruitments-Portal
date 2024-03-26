@@ -1,7 +1,8 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { AuthContext } from "../contexts/auth.context";
 import Button from "./button";
 import Header from "./header";
 import SubHeader from "./subdomain-header";
@@ -51,7 +52,7 @@ export default function JoinTeam(props: {
   interface ResponseData {
     [key: string]: Subdomain[];
   }
-
+  const { emailValue, accessToken } = useContext(AuthContext);
   const [selectedDomains, setSelectedDomains] = useState<string[]>([]);
   const [isShown, setIsShown] = useState(false);
 
@@ -143,7 +144,16 @@ export default function JoinTeam(props: {
               text="CONFIRM"
               onClick={() => {
                 onClick(props.teamName);
-                PutDomains(selectedDomains, props.teamName);
+                if (emailValue === undefined || accessToken === undefined) {
+                  alert("Please Login Again and Try!!");
+                } else {
+                  PutDomains(
+                    selectedDomains,
+                    props.teamName,
+                    emailValue,
+                    accessToken
+                  );
+                }
               }}
             />
           </motion.div>
