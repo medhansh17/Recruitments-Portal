@@ -25,6 +25,14 @@ export default function Dashboard(){
     const [designsub_completed,setDesignsub_completed] =useState<string[]>([]);
     const [loading,setLoading] = useState<boolean>(false);
 
+
+    function removeLoader(){
+        setTimeout(() => {
+            setLoading(false)
+
+        }, 1000);
+    }
+
     useEffect(() => {
         // fetch all quizzes from backend
         // get email from cookie
@@ -44,7 +52,7 @@ export default function Dashboard(){
           }
         })
         .then(response => {
-            setLoading(false);
+            removeLoader()
             setTechsub_pending(response.data.tech.filter(item => !item.completed).map(item => item.subdomain));
           setTechsub_completed(response.data.tech.filter(item => item.completed).map(item => item.subdomain));
           setManagementsub_pending(response.data.management.filter(item => !item.completed).map(item => item.subdomain));
@@ -53,7 +61,7 @@ export default function Dashboard(){
           setDesignsub_completed(response.data.design.filter(item => item.completed).map(item => item.subdomain));
         })
         .catch(error => {
-            setLoading(false);
+            removeLoader()
             // handle the error here
         });
       }, []);
