@@ -1,10 +1,12 @@
 "use client";
-import { useContext } from "react";
-import { AuthContext } from "./contexts/auth.context";
 import axios from "axios";
 
-export const PutDomains = async (selectedDomains: string[], domain: string) => {
-  const { emailValue, accessToken } = useContext(AuthContext);
+export const PutDomains = async (
+  selectedDomains: string[],
+  domain: string,
+  emailValue: string,
+  accessToken: string
+) => {
   try {
     const response = await axios.put(
       `https://recruitments-portal-backend.vercel.app/put_domains/${domain.toLocaleLowerCase()}/${emailValue}`,
@@ -27,8 +29,7 @@ export const PutDomains = async (selectedDomains: string[], domain: string) => {
   }
 };
 
-export const GetDomains = async () => {
-  const { emailValue, accessToken } = useContext(AuthContext);
+export const GetDomains = async (emailValue: string, accessToken: string) => {
   try {
     const response = await axios.get(
       `https://recruitments-portal-backend.vercel.app/get_domains/${emailValue}`,

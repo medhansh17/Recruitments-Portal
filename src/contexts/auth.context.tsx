@@ -29,7 +29,23 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const setCookieAccessToken = (token: string) => {
     setAccessToken(token);
   };
+  useEffect(() => {
+    console.log("Medhansh");
 
+    const cookieValue = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("email"))
+      ?.split("=")[1];
+    const accessTokenValue = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("accessToken"))
+      ?.split("=")[1];
+    if (cookieValue && accessTokenValue) {
+      console.log("Exist");
+      setEmailValue(cookieValue);
+      setAccessToken(accessTokenValue);
+    }
+  });
   return (
     <AuthContext.Provider
       value={{
