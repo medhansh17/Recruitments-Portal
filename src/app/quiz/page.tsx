@@ -5,9 +5,12 @@ import QuestionNumberButton from "@/components/quiz/QuestionNumberButton";
 import { useState } from "react";
 
 const Page = () => {
+
   const [questionNumber, setQuestionNumber] = useState<number>(1);
   const [ansArr, setAnsArr] = useState<string[]>(Array(10).fill(""));
   const arr = new Array(10).fill(0);
+
+
   const questionsArray = arr.map((_, idx) => (
     <QuestionNumberButton
       key={idx}

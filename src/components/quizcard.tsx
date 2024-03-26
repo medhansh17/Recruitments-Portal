@@ -1,32 +1,38 @@
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
-function startQuiz(subDomain:any) {
-
-    const emailValue = document.cookie
-        .split('; ')
-        .find(row => row.startsWith('email'))
-        ?.split('=')[1];
-
-    const accessToken = document.cookie
-        .split('; ')
-        .find(row => row.startsWith('accessToken'))
-        ?.split('=')[1];
-
-    axios.post(`https://recruitments-portal-backend.vercel.app/question/${subDomain}/${emailValue}`,{}, {
-        headers: {
-            Authorization: `Bearer ${accessToken}`
-        }
-    })
-        .then(response => {
-            // handle the response here
-            console.log(response);
-        })
-        .catch(error => {
-            // handle the error here
-        });
-}
 
 export default function Quizcard(props: { domain: string, subDomain: string, completed: boolean}) {
+    const router = useRouter();
+
+    function startQuiz(subDomain:any) {
+
+        const emailValue = document.cookie
+            .split('; ')
+            .find(row => row.startsWith('email'))
+            ?.split('=')[1];
+
+        const accessToken = document.cookie
+            .split('; ')
+            .find(row => row.startsWith('accessToken'))
+            ?.split('=')[1];
+
+        axios.post(`https://recruitments-portal-backend.vercel.app/question/${subDomain}/${emailValue}`,{}, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        })
+            .then(response => {
+                // handle the response here
+                console.log(response.data);
+                localStorage.setItem('questions', response.data);
+                router.push('/quiz/')
+            })
+            .catch(error => {
+                // handle the error here
+            });
+    }
+
     return (
         <div className="p-5 md:h-[30vh] md:w-[25vw] border-[#6117AB] bg-[rgba(82,36,129,0.3)] border-4 mx-5 rounded-2xl flex flex-col my-5 md:my-0">
             <h1 className="font-sarpanch text-white text-xl">{props.domain}</h1>
