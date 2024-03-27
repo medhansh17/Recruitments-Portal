@@ -49,32 +49,34 @@ const SubHeader = (props: { title: string; id: string }) => {
           variants={animationOnViewLeft}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="bg-[url('/heading-top-left.svg')] bg-contain bg-center bg-no-repeat w-[35%] origin-right"
+          className="bg-[url('/heading-top-left.svg')] bg-contain bg-center bg-no-repeat w-[35%] origin-right md:block hidden"
         ></motion.span>
-        <span className="lg:text-4xl sm:text-4xl text-2xl">The</span>
+        <span className="lg:text-4xl sm:text-4xl text-2xl md:block hidden">
+          The
+        </span>
         <motion.span
           variants={animationOnViewRight}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="bg-[url('/heading-top-right.svg')] bg-contain bg-center bg-no-repeat w-[35%] origin-left"
+          className="bg-[url('/heading-top-right.svg')] bg-contain bg-center bg-no-repeat w-[35%] origin-left md:block hidden"
         ></motion.span>
       </div>
       <div className="lg:text-6xl sm:text-5xl text-3xl mx-auto">
         {props.title}
       </div>
-      <div className="flex flex-row justify-between">
+      <div className="flex flex-row md:justify-between justify-center">
         <motion.span
           variants={animationOnViewLeft}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="bg-[url('/heading-bottom-left.svg')] bg-contain bg-center bg-no-repeat w-[35%] origin-right"
+          className="bg-[url('/heading-bottom-left.svg')] bg-contain bg-center bg-no-repeat w-[35%] origin-right md:block hidden"
         ></motion.span>
         <span className="lg:text-4xl sm:text-4xl text-2xl">Team</span>
         <motion.span
           variants={animationOnViewRight}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="bg-[url('/heading-bottom-right.svg')] bg-contain bg-center bg-no-repeat w-[35%] origin-left"
+          className="bg-[url('/heading-bottom-right.svg')] bg-contain bg-center bg-no-repeat w-[35%] origin-left md:block hidden"
         ></motion.span>
       </div>
     </motion.div>

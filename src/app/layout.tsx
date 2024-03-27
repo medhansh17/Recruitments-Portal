@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Nav from "../components/navbar";
+import Nav from "../components/navbar/navbar";
 import { Sarpanch } from "next/font/google";
 import { AuthProvider } from "@/contexts/auth.context";
 export const metadata: Metadata = {
@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${sarpanch.variable}`}>
       <body className="bg-main-bg min-h-screen bg-[url('/back-grid-vertical.svg')] md:bg-[url('/back-grid-horizontal.svg')] bg-cover bg-center bg-fixed">
-        <AuthProvider> 
+        <AuthProvider>
           <Nav />
           {children}
         </AuthProvider>
