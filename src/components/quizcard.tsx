@@ -17,7 +17,7 @@ export default function Quizcard(props: { domain: string, subDomain: string, com
             .find(row => row.startsWith('accessToken'))
             ?.split('=')[1];
 
-        axios.post(`https://recruitments-portal-backend.vercel.app/question/${subDomain}/${emailValue}`,{}, {
+        axios.post(`https://recruitments-portal-backend.vercel.app/question/${subDomain.toLowerCase()}/${emailValue}`,{}, {
             headers: {
                 Authorization: `Bearer ${accessToken}`
             }
@@ -25,7 +25,7 @@ export default function Quizcard(props: { domain: string, subDomain: string, com
             .then(response => {
                 // handle the response here
                 console.log(response.data);
-                localStorage.setItem('questions', response.data);
+                localStorage.setItem('questions', JSON.stringify(response.data));
                 router.push('/quiz/')
             })
             .catch(error => {

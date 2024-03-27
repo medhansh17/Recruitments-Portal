@@ -1,6 +1,7 @@
-import { useState } from "react";
-import round1 from "@/constants/round1.json";
+import { useEffect, useState } from "react";
+// import round1 from "@/constants/round1.json";
 import Input from "./Input";
+import { set } from "firebase/database";
 
 interface OptionProps {
   text: string;
@@ -9,11 +10,20 @@ interface OptionProps {
   questionNumber: number;
 }
 
+interface OptionData {
+  _id: string;
+  question: string;
+  type: string;
+  options: string[];
+}
+
 const Option = ({ text, ansArr, setAnsArr, questionNumber }: OptionProps) => {
   return (
     <li
       className={`p-2 bg-[#522481] bg-opacity-50 rounded-xl backdrop-blur-sm border-main-blue border-2 ${
-        text === ansArr[questionNumber - 1] ? "border-4 border-main-pink" : "border-2"
+        text === ansArr[questionNumber - 1]
+          ? "border-4 border-main-pink"
+          : "border-2"
       } my-6 cursor-pointer`}
       onClick={() => {
         setAnsArr((prev: string[]) => {
@@ -47,9 +57,10 @@ const Question = ({
   setQuestionNumber,
 }: QuestionProps) => {
   const [option, setOption] = useState<number>(1);
+  const [round1, setRound1] = useState<OptionData[]>([]);
   const question: QuestionData = round1[questionNumber - 1];
 
-  const options = question.options?.map((option, idx) => (
+  const options = question?.options?.map((option, idx) => (
     <Option
       key={idx}
       text={option}
@@ -58,13 +69,16 @@ const Question = ({
       questionNumber={questionNumber}
     />
   ));
+  useEffect(() => {
+    setRound1(JSON.parse(localStorage.getItem("questions") || "[]"));
+  }, []);
 
   return (
     <div className="QnA">
       <h1 className="font-bold font-striger tracking-wider text-xl">
-        {round1[questionNumber - 1].question}
+        {round1[questionNumber - 1]?.question}
       </h1>
-      {round1[questionNumber - 1].options ? (
+      {round1[questionNumber - 1]?.options.length !== 0 ? (
         options
       ) : (
         <Input
