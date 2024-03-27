@@ -98,20 +98,7 @@ const Question = ({
         ans: ansArr[i],
       });
     }
-    // axios
-    //   .patch(
-    //     `https://recruitments-portal-backend.vercel.app/response/submit`,
-    //     {
-    //       email: emailValue,
-    //       domain: localStorage.getItem("domain"),
-    //       quesions: anwArray,
-    //     },
-    //     {
-    //       headers: {
-    //         Authorization: `Bearer ${accessToken}`,
-    //       },
-    //     }
-    //   )
+    // TODO: Add loader
     axios
       .post(
         `https://recruitments-portal-backend.vercel.app/question/${localStorage.getItem(
@@ -124,7 +111,7 @@ const Question = ({
           },
         }
       )
-      .then((response) => {
+      .then((_) => {
         axios.patch(
           `https://recruitments-portal-backend.vercel.app/response/submit`,
           {
@@ -139,7 +126,7 @@ const Question = ({
           }
         );
       })
-      .then((res) => {
+      .then((_) => {
         router.push("/dashboard");
       })
       .catch((error) => {
