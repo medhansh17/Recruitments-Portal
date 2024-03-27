@@ -2,12 +2,19 @@ import { useEffect, useState } from "react";
 // import round1 from "@/constants/round1.json";
 import Input from "./Input";
 import { set } from "firebase/database";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 interface OptionProps {
   text: string;
   ansArr: string[];
   setAnsArr: React.Dispatch<React.SetStateAction<string[]>>;
   questionNumber: number;
+}
+
+interface answerFormat {
+  q: string;
+  ans: string;
 }
 
 interface OptionData {
@@ -56,6 +63,7 @@ const Question = ({
   setAnsArr,
   setQuestionNumber,
 }: QuestionProps) => {
+  const router = useRouter();
   const [option, setOption] = useState<number>(1);
   const [round1, setRound1] = useState<OptionData[]>([]);
   const question: QuestionData = round1[questionNumber - 1];
@@ -73,6 +81,72 @@ const Question = ({
     setRound1(JSON.parse(localStorage.getItem("questions") || "[]"));
   }, []);
 
+  const emailValue = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith("email"))
+    ?.split("=")[1];
+  const accessToken = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith("accessToken"))
+    ?.split("=")[1];
+
+  const sendData = () => {
+    const anwArray: answerFormat[] = [];
+    for (let i = 0; i < ansArr.length; i++) {
+      anwArray.push({
+        q: round1[i].question,
+        ans: ansArr[i],
+      });
+    }
+    // axios
+    //   .patch(
+    //     `https://recruitments-portal-backend.vercel.app/response/submit`,
+    //     {
+    //       email: emailValue,
+    //       domain: localStorage.getItem("domain"),
+    //       quesions: anwArray,
+    //     },
+    //     {
+    //       headers: {
+    //         Authorization: `Bearer ${accessToken}`,
+    //       },
+    //     }
+    //   )
+    axios
+      .post(
+        `https://recruitments-portal-backend.vercel.app/question/${localStorage.getItem(
+          "domain"
+        )}/${emailValue}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      )
+      .then((response) => {
+        axios.patch(
+          `https://recruitments-portal-backend.vercel.app/response/submit`,
+          {
+            email: emailValue,
+            domain: JSON.parse(localStorage.getItem("domain") || "").toString(),
+            questions: anwArray,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        );
+      })
+      .then((res) => {
+        router.push("/dashboard");
+      })
+      .catch((error) => {
+        console.log("Error in submitting response");
+        console.log(error);
+      });
+  };
   return (
     <div className="QnA">
       <h1 className="font-bold font-striger tracking-wider text-xl">
@@ -109,6 +183,7 @@ const Question = ({
           <button
             onClick={() => {
               // send data to server
+              sendData();
             }}
           >
             Submit

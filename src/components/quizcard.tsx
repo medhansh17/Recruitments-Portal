@@ -26,6 +26,7 @@ export default function Quizcard(props: { domain: string, subDomain: string, com
                 // handle the response here
                 console.log(response.data);
                 localStorage.setItem('questions', JSON.stringify(response.data));
+                localStorage.setItem('domain',JSON.stringify(subDomain.toLowerCase()));
                 router.push('/quiz/')
             })
             .catch(error => {
