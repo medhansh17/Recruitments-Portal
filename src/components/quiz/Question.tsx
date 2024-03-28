@@ -1,9 +1,9 @@
+"use client";
 import { useEffect, useState } from "react";
-// import round1 from "@/constants/round1.json";
 import Input from "./Input";
-import { set } from "firebase/database";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import Loader from "../loader";
 
 interface OptionProps {
   text: string;
@@ -67,6 +67,7 @@ const Question = ({
   const [option, setOption] = useState<number>(1);
   const [round1, setRound1] = useState<OptionData[]>([]);
   const question: QuestionData = round1[questionNumber - 1];
+  const [loading, setLoading] = useState<boolean>(false);
 
   const options = question?.options?.map((option, idx) => (
     <Option
@@ -81,16 +82,15 @@ const Question = ({
     setRound1(JSON.parse(localStorage.getItem("questions") || "[]"));
   }, []);
 
-  const emailValue = document.cookie
-    .split("; ")
-    .find((row) => row.startsWith("email"))
-    ?.split("=")[1];
-  const accessToken = document.cookie
-    .split("; ")
-    .find((row) => row.startsWith("accessToken"))
-    ?.split("=")[1];
-
   const sendData = () => {
+    const emailValue = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("email"))
+      ?.split("=")[1];
+    const accessToken = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("accessToken"))
+      ?.split("=")[1];
     const anwArray: answerFormat[] = [];
     for (let i = 0; i < ansArr.length; i++) {
       anwArray.push({
@@ -98,7 +98,7 @@ const Question = ({
         ans: ansArr[i],
       });
     }
-    // TODO: Add loader
+    setLoading(true);
     axios
       .post(
         `https://recruitments-portal-backend.vercel.app/question/${localStorage.getItem(
@@ -127,6 +127,7 @@ const Question = ({
         );
       })
       .then((_) => {
+        setLoading(false);
         router.push("/dashboard");
       })
       .catch((error) => {
@@ -177,6 +178,7 @@ const Question = ({
           </button>
         )}
       </div>
+      <Loader visibility={loading}/>
     </div>
   );
 };
