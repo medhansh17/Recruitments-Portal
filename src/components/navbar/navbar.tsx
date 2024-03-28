@@ -1,12 +1,11 @@
 "use client";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import {AnimatePresence, motion} from "framer-motion";
 import "./hamburger.css";
-import Navlink, { HamNavLink } from "../navlink";
-import { usePathname } from "next/navigation";
+import {HamNavLink, HamNavLinkLogout, Navlink} from "../navlink";
+import {usePathname, useRouter} from "next/navigation";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import {useState} from "react";
 
 const dropdownVariants = {
   key: "div",
@@ -50,36 +49,37 @@ export default function Nav() {
           <AnimatePresence>
             <motion.div
               {...dropdownVariants}
-              className="w-full h-screen bg-main-bg absolute top-0 flex justify-center items-center z-30 origin-top"
+              className="w-screen h-screen bg-main-bg absolute top-0 flex justify-center items-center z-30 origin-top"
             >
-              <div className="flex w-[80%] flex-col">
-                <ul>
+              <div className="flex w-[100vw] flex-col items-center">
+                <div>
                   <HamNavLink
                     target="/"
                     text="Home"
                     active={pathname === "/"}
+                    setIsShown={setIsShown}
                   />
                   <HamNavLink
                     target="/teams"
                     text="Teams"
                     active={pathname === "/teams"}
+                    setIsShown={setIsShown}
                   />
                   <HamNavLink
                     target="/faq"
                     text="FAQS"
                     active={pathname === "/faq"}
+                    setIsShown={setIsShown}
                   />
                   <HamNavLink
                     target="/dashboard"
                     text="Dashboard"
                     active={pathname === "/dashboard"}
+                    setIsShown={setIsShown}
                   />
-                  <HamNavLink
-                    target="/contact"
-                    text="Contact"
-                    active={pathname === "/contact"}
-                  />
-                </ul>
+                  <HamNavLinkLogout text={"Logout"} setIsShown={setIsShown} handleLogout={handleSignout}/>
+
+                </div>
               </div>
             </motion.div>
           </AnimatePresence>
@@ -102,7 +102,7 @@ export default function Nav() {
         </button>
         <ul
           className={` ${
-            pathname === "/login" ? "hidden md:hidden" : " hidden md:flex"
+            pathname === "/login"|| pathname.startsWith("/admin") ? "hidden md:hidden" : " hidden md:flex"
           } flex-row justify-center items-center font-striger px-4 py-2 bg-main-grey bg-opacity-40 rounded-full`}
         >
           <Navlink target="/" text="Home" active={pathname === "/"} />
@@ -116,11 +116,6 @@ export default function Nav() {
             target="/dashboard"
             text="Dashboard"
             active={pathname === "/dashboard"}
-          />
-          <Navlink
-            target="/contact"
-            text="Contact"
-            active={pathname === "/contact"}
           />
           <Link href="https://discord.gg/swF4utKTk4">
             <li className="text-white text-2xl mx-5">
@@ -138,8 +133,8 @@ export default function Nav() {
           <Image
             src="/logout.png"
             alt="Logout button"
-            width={100}
-            height={100}
+            width={50}
+            height={50}
           />
         </div>
       </nav>
