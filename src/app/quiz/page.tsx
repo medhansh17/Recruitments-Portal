@@ -1,15 +1,17 @@
 "use client";
 
+import Button from "@/components/button";
 import Question from "@/components/quiz/Question";
 import QuestionNumberButton from "@/components/quiz/QuestionNumberButton";
-import {useEffect, useState} from "react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
 const Page = () => {
   const [questionNumber, setQuestionNumber] = useState<number>(1);
   const [ansArr, setAnsArr] = useState<string[]>([]);
   // const arr = new Array(10).fill(0);
   const [arr, setArr] = useState<number[]>([]);
- 
+
   const questionsArray = arr.map((_, idx) => (
     <QuestionNumberButton
       key={idx}
@@ -28,15 +30,28 @@ const Page = () => {
 
   return (
     <main className="min-h-screen text-white mx-10 sm:mx-20 flex flex-col justify-center py-10 pt-32">
-      <Question
-        questionNumber={questionNumber}
-        ansArr={ansArr}
-        setAnsArr={setAnsArr}
-        setQuestionNumber={setQuestionNumber}
-      />
-      <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-10 text-center gap-4">
-        {questionsArray}
-      </div>
+      {questionsArray.length === 0 ? (
+        <div className="flex flex-col gap-10 mt-10">
+          <h1 className="text-center font-striger text-5xl">No questions found</h1>
+          <div className=" flex justify-center items-center mb-36">
+            <Link href="/dashboard">
+              <Button text="Go to Dashboard" />
+            </Link>
+          </div>
+        </div>
+      ) : (
+        <>
+          <Question
+            questionNumber={questionNumber}
+            ansArr={ansArr}
+            setAnsArr={setAnsArr}
+            setQuestionNumber={setQuestionNumber}
+          />
+          <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-10 text-center gap-4">
+            {questionsArray}
+          </div>
+        </>
+      )}
     </main>
   );
 };
