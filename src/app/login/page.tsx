@@ -19,8 +19,14 @@ function validateEmail(email:string | null) {
   }
 }
 
-
 export default function Login() {
+
+    function removeLoader(){
+        setTimeout(() => {
+            setLoading(false)
+
+        }, 1000);
+    }
   const router = useRouter();
 
   const [loading, setLoading] = useState(false);
@@ -41,19 +47,19 @@ export default function Login() {
           //create cookie of user email and response.data.accessToken
           document.cookie = `email=${user.email}; path=/`
           document.cookie = `accessToken=${response.data.accessToken}; path=/`
-            setLoading(false)
+            removeLoader()
           router.push("/")
           
       }
       else{
         alert("Email not registered for IEEE-CS")
-            setLoading(false)
+            removeLoader()
 
         }
     })
       .catch((error) => {
         alert(error.message)
-          setLoading(false)
+          removeLoader()
 
       })
   }
@@ -85,7 +91,7 @@ export default function Login() {
 
       }).catch((error) => {
         const errorMessage = error.message;
-        setLoading(false)
+        removeLoader()
         alert(errorMessage)
       });
 

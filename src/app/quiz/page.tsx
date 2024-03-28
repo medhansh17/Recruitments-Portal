@@ -2,8 +2,7 @@
 
 import Question from "@/components/quiz/Question";
 import QuestionNumberButton from "@/components/quiz/QuestionNumberButton";
-import { set } from "firebase/database";
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 
 const Page = () => {
   const [questionNumber, setQuestionNumber] = useState<number>(1);
@@ -19,13 +18,13 @@ const Page = () => {
       setQuestionNumber={setQuestionNumber}
     />
   ));
-  useEffect(() => {
-    const q = JSON.parse(localStorage.getItem("questions") || "[]");
-    console.log("questions from local storage");
-    console.log(q);
-    setAnsArr(Array(q.length).fill(""));
-    setArr(Array(q.length).fill(0));
-  }, []);
+    useEffect(() => {
+        const q = JSON.parse(localStorage.getItem("questions") || "[]");
+        console.log("questions from local storage");
+        console.log(q);
+        setAnsArr(Array(q.length).fill(""));
+        setArr(Array(q.length).fill(0));
+    }, []);
 
   return (
     <main className="min-h-screen text-white mx-10 sm:mx-20 flex flex-col justify-center py-10 pt-32">

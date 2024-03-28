@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 // import round1 from "@/constants/round1.json";
 import Input from "./Input";
-import { set } from "firebase/database";
 import axios from "axios";
-import { useRouter } from "next/navigation";
+import {useRouter} from "next/navigation";
 
 interface OptionProps {
   text: string;
@@ -25,6 +24,8 @@ interface OptionData {
 }
 
 const Option = ({ text, ansArr, setAnsArr, questionNumber }: OptionProps) => {
+
+
   return (
     <li
       className={`p-2 bg-[#522481] bg-opacity-50 rounded-xl backdrop-blur-sm border-main-blue border-2 ${
