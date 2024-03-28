@@ -25,6 +25,8 @@ interface OptionData {
 }
 
 const Option = ({ text, ansArr, setAnsArr, questionNumber }: OptionProps) => {
+
+
   return (
     <li
       className={`p-2 bg-[#522481] bg-opacity-50 rounded-xl backdrop-blur-sm border-main-blue border-2 ${

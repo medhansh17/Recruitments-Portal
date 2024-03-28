@@ -20,13 +20,13 @@ const Page = () => {
       setQuestionNumber={setQuestionNumber}
     />
   ));
-  useEffect(() => {
-    const q = JSON.parse(localStorage.getItem("questions") || "[]");
-    console.log("questions from local storage");
-    console.log(q);
-    setAnsArr(Array(q.length).fill(""));
-    setArr(Array(q.length).fill(0));
-  }, []);
+    useEffect(() => {
+        const q = JSON.parse(localStorage.getItem("questions") || "[]");
+        console.log("questions from local storage");
+        console.log(q);
+        setAnsArr(Array(q.length).fill(""));
+        setArr(Array(q.length).fill(0));
+    }, []);
 
   return (
     <main className="min-h-screen text-white mx-10 sm:mx-20 flex flex-col justify-center py-10 pt-32">
