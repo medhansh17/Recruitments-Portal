@@ -1,13 +1,33 @@
-import Link from "next/link"
+import Link from "next/link";
 
 type NavlinkProps = {
-    target: string,
-    text: string,
-    active?: boolean
+  target: string;
+  text: string;
+  active?: boolean;
 };
 
-export default function Navlink({target, text, active}:NavlinkProps){
-    return <Link href={target}>
-        <li className={`${active? "text-main-blue":"text-white"} text-2xl mx-5`}>{text}</li>
+export default function Navlink({ target, text, active }: NavlinkProps) {
+  return (
+    <Link href={target}>
+      <li
+        className={`${active ? "text-main-blue" : "text-white"} text-2xl mx-5`}
+      >
+        {text}
+      </li>
     </Link>
+  );
+}
+
+export function HamNavLink({ target, text, active }: NavlinkProps) {
+  return (
+    <Link href={target}>
+      <li
+        className={`${
+          active ? "text-main-blue" : "text-white"
+        } md:text-6xl text-4xl  mx-5 w-full text-center my-5`}
+      >
+        {text}
+      </li>
+    </Link>
+  );
 }

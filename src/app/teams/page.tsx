@@ -1,6 +1,7 @@
 import JoinTeam from "@/components/joining-page";
 import ScrollIndicator from "@/components/scrollindicator";
 import Button from "@/components/button";
+import Link from "next/link";
 
 export default function Teams() {
   return (
@@ -8,21 +9,22 @@ export default function Teams() {
       <JoinTeam
         teamName="Management"
         order="1"
-        titles={["EVENTS", "OUTREACH", "FINANCE"]}
+        titles={["P&M", "Editotrial", "Events"]}
       />
       <JoinTeam
         teamName="Tech"
         order="2"
-        titles={["APP", "WEB", "AI/ML", "R&D", "DEVOPS"]}
+        titles={["App", "Web", "AI/ML", "Research", "DevOps"]}
       />
       <JoinTeam
         teamName="Design"
         order="1"
-        titles={["UI/UX", "GRAPHICS", "VIDEO"]}
+        titles={["UI/UX", "Graphic Design", "Video"]}
       />
       <div className=" flex justify-center items-center mb-36">
-      <Button text="Go to Dashboard" />
-
+        <Link href="/dashboard">
+          <Button text="Go to Dashboard" />
+        </Link>
       </div>
       <ScrollIndicator />
     </main>

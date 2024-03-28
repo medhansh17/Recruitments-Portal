@@ -3,7 +3,7 @@ export default function Hero() {
   return (
     <section className="flex flex-col items-center justify-center h-screen w-full text-white pt-10">
       <div className="flex flex-col items-center justify-center font-striger my-10">
-        <h1 className="text-6xl md:text-8xl text-center ">TRIUMPH</h1>
+        <h1 className="text-6xl md:text-8xl text-center ">IEEE-CS</h1>
         <div className="flex flex-row items-center justify-center">
           <img
             src="/graphics/left-lines.svg"
@@ -11,7 +11,7 @@ export default function Hero() {
             className="w-1/4    h-auto"
           />
           <h2 className="text-2xl md:text-4xl text-center text-white mx-5 font-sarpanch font-bold">
-            IN THE
+            2024
           </h2>
           <img
             src="/graphics/right-lines.svg"
@@ -19,12 +19,12 @@ export default function Hero() {
             className="w-1/4 h-auto"
           />
         </div>
-        <h1 className="text-6xl md:text-8xl text-center">UNKNOWN</h1>
+        <h1 className="text-6xl md:text-8xl text-center">RECRUITMENTS</h1>
       </div>
       <div className=" md:visible flex flex-col items-center justify-center font-sarpanch text-2xl my-10">
         Introducing the best chapter
       </div>
-      <div className="  md:visible flex flex-row items-center justify-center font-sarpanch">
+      <div className="  md:visible flex flex-row items-center justify-center font-sarpanch text-center">
         Where innovation meets technology: we forge tech <br></br>
         that transcends from ordinary: into realms of the unknown
       </div>

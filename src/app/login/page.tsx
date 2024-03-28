@@ -2,11 +2,12 @@
 
 import Button from "@/components/button";
 import {firebaseConfig} from "@/firebase.config"
-import { initializeApp } from "firebase/app";
-import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, User } from "firebase/auth";
+import {initializeApp} from "firebase/app";
+import {getAuth, GoogleAuthProvider, signInWithPopup, signOut, User} from "firebase/auth";
 import axios from "axios";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import {useRouter} from "next/navigation";
+import {useEffect, useState} from "react";
+import Loader from "@/components/loader";
 
 function validateEmail(email:string | null) {
   //email must end with vitstudent.ac.in
@@ -18,9 +19,17 @@ function validateEmail(email:string | null) {
   }
 }
 
-
 export default function Login() {
+
+    function removeLoader(){
+        setTimeout(() => {
+            setLoading(false)
+
+        }, 1000);
+    }
   const router = useRouter();
+
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     // Check if the router is available
@@ -37,22 +46,28 @@ export default function Login() {
         if(response.status === 200){
           //create cookie of user email and response.data.accessToken
           document.cookie = `email=${user.email}; path=/`
-          document.cookie = `token=${response.data.accessToken}; path=/`
+          document.cookie = `accessToken=${response.data.accessToken}; path=/`
+            removeLoader()
           router.push("/")
           
       }
       else{
         alert("Email not registered for IEEE-CS")
-      }
+            removeLoader()
+
+        }
     })
       .catch((error) => {
         alert(error.message)
+          removeLoader()
+
       })
   }
 
 
 
   function handleLogin(){
+    setLoading(true);
     const app = initializeApp(firebaseConfig);
     const provider = new GoogleAuthProvider();
     provider.setCustomParameters(
@@ -76,6 +91,7 @@ export default function Login() {
 
       }).catch((error) => {
         const errorMessage = error.message;
+        removeLoader()
         alert(errorMessage)
       });
 
@@ -93,8 +109,9 @@ export default function Login() {
             marginBottom: "10vh",
           }}
         />
-        <Button text="Continue with google" onClick={handleLogin} />
+        <Button text="Sign in with Google" onClick={handleLogin} />
       </div>
+        <Loader visibility={loading} />
     </div>
   );
 }
