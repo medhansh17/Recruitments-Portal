@@ -2,11 +2,13 @@
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import ResponseDetails from './ResponseDetails';
 
 const Button = dynamic(() => import('@/components/button'), { ssr: false });
 
 const StudentResponses: React.FC = () => {
   const [responses, setResponses] = useState<any[]>([]);
+  const [selectedEmail, setSelectedEmail] = useState<string | null>(null);
 
   useEffect(() => {
     fetchData('web'); // Fetch data for 'web' domain initially
@@ -22,6 +24,13 @@ const StudentResponses: React.FC = () => {
     }
   };
 
+  const handleEmailClick = (email: string) => {
+    setSelectedEmail(email);
+  };
+
+  const handleCloseDetails = () => {
+    setSelectedEmail(null);
+  };
   return (
     <div className="flex justify-center">
       <div className="flex flex-col items-start mr-10">
@@ -36,17 +45,20 @@ const StudentResponses: React.FC = () => {
         <Button onClick={() => fetchData('pnm')} text="PNM" />
         <Button onClick={() => fetchData('editorial')} text="Editorial" />
         <Button onClick={() => fetchData('events')} text="Events" />
-      </div>
+        </div>
       <div className="overflow-y-auto max-h-96 bg-gray-100 p-4 rounded-md">
         <h2 className="text-xl font-bold mb-4">Responses</h2>
         <div>
           {responses.slice(0, 10).map((response, index) => (
             <div key={index} className="mb-2">
-              <p>{response.EmailID}</p>
+              <button className="text-blue-500" onClick={() => handleEmailClick(response.EmailID)}>
+                {response.EmailID}
+              </button>
             </div>
           ))}
         </div>
       </div>
+      {selectedEmail && <ResponseDetails email={selectedEmail} onClose={handleCloseDetails} />}
     </div>
   );
 };
