@@ -1,11 +1,11 @@
 "use client";
 import Link from "next/link";
-import {AnimatePresence, motion} from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import "./hamburger.css";
-import {HamNavLink, HamNavLinkLogout, Navlink} from "../navlink";
-import {usePathname, useRouter} from "next/navigation";
+import { HamNavLink, HamNavLinkLogout, Navlink } from "../navlink";
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
-import {useState} from "react";
+import { useState } from "react";
 
 const dropdownVariants = {
   key: "div",
@@ -43,15 +43,15 @@ export default function Nav() {
   return (
     <>
       <nav
-        className={`flex flex-row justify-between items-center fixed py-5 w-full z-[31]`}
+        className={` flex flex-row justify-between items-center fixed py-5 w-full z-[31]`}
       >
         {isShown && (
           <AnimatePresence>
             <motion.div
               {...dropdownVariants}
-              className="w-screen h-screen bg-main-bg absolute top-0 flex justify-center items-center z-30 origin-top"
+              className={` w-screen h-screen bg-main-bg absolute top-0 flex justify-center items-center z-30 origin-top`}
             >
-              <div className="flex w-[100vw] flex-col items-center">
+              <div className={` flex w-[100vw] flex-col items-center`}>
                 <div>
                   <HamNavLink
                     target="/"
@@ -77,8 +77,11 @@ export default function Nav() {
                     active={pathname === "/dashboard"}
                     setIsShown={setIsShown}
                   />
-                  <HamNavLinkLogout text={"Logout"} setIsShown={setIsShown} handleLogout={handleSignout}/>
-
+                  <HamNavLinkLogout
+                    text={"Logout"}
+                    setIsShown={setIsShown}
+                    handleLogout={handleSignout}
+                  />
                 </div>
               </div>
             </motion.div>
@@ -90,7 +93,11 @@ export default function Nav() {
           </Link>
         </div>
         <button
-          className=" md:hidden inline-block hamburger hamburger--spring z-[31]"
+          className={`${
+            pathname === "/login" || pathname.startsWith("/admin")
+              ? "hidden"
+              : "visible"
+          } md:hidden inline-block hamburger hamburger--spring z-[31]`}
           type="button"
           onClick={() => {
             toggleNav();
@@ -102,7 +109,9 @@ export default function Nav() {
         </button>
         <ul
           className={` ${
-            pathname === "/login"|| pathname.startsWith("/admin") ? "hidden md:hidden" : " hidden md:flex"
+            pathname === "/login" || pathname.startsWith("/admin")
+              ? "hidden md:hidden"
+              : " hidden md:flex"
           } flex-row justify-center items-center font-striger px-4 py-2 bg-main-grey bg-opacity-40 rounded-full`}
         >
           <Navlink target="/" text="Home" active={pathname === "/"} />
@@ -125,17 +134,12 @@ export default function Nav() {
         </ul>
         <div
           id="logout"
-          className={`${
-            pathname === "/login" ? "hidden" : "visible"
-          } size-14  md:block  hidden mr-[5%]`}
+          className={`hidden ${
+            pathname === "/login" ? "md:hidden" : "md:block"
+          } size-14   mr-[5%] hover:cursor-pointer`}
           onClick={handleSignout}
         >
-          <Image
-            src="/logout.png"
-            alt="Logout button"
-            width={50}
-            height={50}
-          />
+          <Image src="/logout.png" alt="Logout button" width={50} height={50} />
         </div>
       </nav>
     </>
