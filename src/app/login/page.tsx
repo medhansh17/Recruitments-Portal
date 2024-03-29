@@ -8,9 +8,7 @@ import axios from "axios";
 import {useRouter} from "next/navigation";
 import {useEffect, useState} from "react";
 import Loader from "@/components/loader";
-import {Bounce, toast, ToastContainer} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
+import {Bounce, toast} from 'react-toastify';
 
 function validateEmail(email:string | null) {
   //email must end with vitstudent.ac.in
@@ -72,7 +70,17 @@ export default function Login() {
         }
     })
       .catch((error) => {
-        alert(error.message)
+          toast.error(error.message, {
+              position: "bottom-center",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+              transition: Bounce,
+          });
           removeLoader()
 
       })
@@ -148,7 +156,6 @@ export default function Login() {
         <Button text="Sign in with Google" onClick={handleLogin} />
       </div>
         <Loader visibility={loading} />
-        <ToastContainer/>
     </div>
   );
 }
