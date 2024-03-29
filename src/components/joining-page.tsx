@@ -21,39 +21,17 @@ const dropdownVariants = {
   },
   transition: { duration: 0.5, ease: [0.12, 0, 0.39, 0] },
 };
-interface Subdomain {
-  subdomain: string;
-  completed: boolean;
-}
-
-interface Data {
-  [key: string]: Subdomain[];
-}
-
-function getSubdomainsByKey(data: Data, key: string): string[] {
-  if (data.hasOwnProperty(key)) {
-    const subdomains: Subdomain[] = data[key];
-    return subdomains.map((subdomainObj) => subdomainObj.subdomain);
-  } else {
-    return [];
-  }
-}
 
 export default function JoinTeam(props: {
   teamName: string;
   order: string;
   titles: string[];
+  selectedDomains: string[];
 }) {
-  interface Subdomain {
-    subdomain: string;
-    completed: boolean;
-  }
-
-  interface ResponseData {
-    [key: string]: Subdomain[];
-  }
-  const { emailValue, accessToken } = useContext(AuthContext);
-  const [selectedDomains, setSelectedDomains] = useState<string[]>([]);
+  const { emailValue, accessToken, responseData } = useContext(AuthContext);
+  const [selectedDomains, setSelectedDomains] = useState<string[]>(
+    props.selectedDomains
+  );
   const [isShown, setIsShown] = useState(false);
 
   const onClick = (teamName: string) => {
@@ -92,18 +70,7 @@ export default function JoinTeam(props: {
   useEffect(() => {
     setIsShown(false);
     document.body.style.overflow = "auto";
-    // const fetchData = async () => {
-    //   try {
-    //     const responseData: ResponseData = await getDomains();
-    //     setSelectedDomains(getSubdomainsByKey(responseData, props.teamName));
-    //     console.log(selectedDomains);
-    //   } catch (error) {
-    //     console.error("Error fetching domains:", error);
-    //   }
-    // };
-    // fetchData();
   }, []);
-
   return (
     <>
       <div
@@ -125,7 +92,7 @@ export default function JoinTeam(props: {
         {isShown && (
           <motion.div
             {...dropdownVariants}
-            className="w-full h-screen bg-main-bg inset-0 flex  flex-col justify-around items-center fixed z-20 origin-top"
+            className="w-full h-screen bg-main-bg inset-0 flex  flex-col justify-around items-center fixed z-40 origin-top"
           >
             <div className="w-[95%] h-[70%] flex flex-row  justify-evenly items-center flex-wrap gap-x-[14%]">
               {props.titles.map((title) => (
@@ -136,7 +103,11 @@ export default function JoinTeam(props: {
                     handleClick({ title });
                   }}
                 >
-                  <SubHeader title={title} id={title} />
+                  <SubHeader
+                    title={title}
+                    id={title}
+                    selected={selectedDomains}
+                  />
                 </motion.div>
               ))}
             </div>
