@@ -1,5 +1,3 @@
-import React from "react";
-
 interface QuestionNumberButtonProps {
   qNo: number;
   setQuestionNumber: React.Dispatch<React.SetStateAction<number>>;

@@ -956,3 +956,18 @@
   bottom: 0;
   transform: rotate(-90deg);
 }
+
+
+/* Change the color of the hamburger icon */
+.hamburger-inner,
+.hamburger-inner::before,
+.hamburger-inner::after {
+  background-color: #f8a31b;
+}
+
+/* Change the color of the hamburger icon when the menu is active */
+.hamburger.is-active .hamburger-inner,
+.hamburger.is-active .hamburger-inner::before,
+.hamburger.is-active .hamburger-inner::after {
+  background-color: #f8a31b;
+}
