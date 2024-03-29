@@ -5,7 +5,6 @@ import axios from "axios";
 import Loader from "@/components/loader";
 import styles from "./dashboard.module.css";
 
-
 type Quiz = {
   completed: boolean;
   subdomain: string;

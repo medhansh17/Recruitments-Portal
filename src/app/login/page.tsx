@@ -8,6 +8,9 @@ import axios from "axios";
 import {useRouter} from "next/navigation";
 import {useEffect, useState} from "react";
 import Loader from "@/components/loader";
+import {Bounce, toast, ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function validateEmail(email:string | null) {
   //email must end with vitstudent.ac.in
@@ -52,7 +55,18 @@ export default function Login() {
           
       }
       else{
-        alert("Email not registered for IEEE-CS")
+            toast.error("Email not registered for IEEE-CS", {
+                position: "bottom-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Bounce,
+            });
+
             removeLoader()
 
         }
@@ -83,7 +97,18 @@ export default function Login() {
         const token = credential.accessToken;
         const user = result.user;
         if(!validateEmail(user.email)){
-          alert("Please login with your VIT email")
+            toast.error("Please login with your VIT email", {
+                position: "bottom-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Bounce,
+            });
+
           signOut(auth);
         }
 
@@ -92,8 +117,19 @@ export default function Login() {
       }).catch((error) => {
         const errorMessage = error.message;
         removeLoader()
-        alert(errorMessage)
-      });
+        toast.error(errorMessage, {
+            position: "bottom-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            transition: Bounce,
+        });
+
+    });
 
   }
   return (
@@ -112,6 +148,7 @@ export default function Login() {
         <Button text="Sign in with Google" onClick={handleLogin} />
       </div>
         <Loader visibility={loading} />
+        <ToastContainer/>
     </div>
   );
 }
