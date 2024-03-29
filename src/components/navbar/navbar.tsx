@@ -43,15 +43,15 @@ export default function Nav() {
   return (
     <>
       <nav
-        className={`flex flex-row justify-between items-center fixed py-5 w-full z-[31]`}
+        className={` flex flex-row justify-between items-center fixed py-5 w-full z-[31]`}
       >
         {isShown && (
           <AnimatePresence>
             <motion.div
               {...dropdownVariants}
-              className="w-screen h-screen bg-main-bg absolute top-0 flex justify-center items-center z-30 origin-top"
+              className={` w-screen h-screen bg-main-bg absolute top-0 flex justify-center items-center z-30 origin-top`}
             >
-              <div className="flex w-[100vw] flex-col items-center">
+              <div className={` flex w-[100vw] flex-col items-center`}>
                 <div>
                   <HamNavLink
                     target="/"
@@ -90,7 +90,9 @@ export default function Nav() {
           </Link>
         </div>
         <button
-          className=" md:hidden inline-block hamburger hamburger--spring z-[31]"
+          className={`${
+              pathname === "/login"|| pathname.startsWith("/admin") ? "hidden" : "visible"
+          } md:hidden inline-block hamburger hamburger--spring z-[31]`}
           type="button"
           onClick={() => {
             toggleNav();
@@ -125,9 +127,9 @@ export default function Nav() {
         </ul>
         <div
           id="logout"
-          className={`${
-            pathname === "/login" ? "hidden" : "visible"
-          } size-14  md:block  hidden mr-[5%]`}
+          className={`hidden ${
+            pathname === "/login" ? "md:hidden" : "md:block"
+          } size-14   mr-[5%]`}
           onClick={handleSignout}
         >
           <Image
