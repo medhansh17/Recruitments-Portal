@@ -27,12 +27,11 @@ export default function AdminLogin() {
 
   function verifyAdminUser(user: User) {
     axios
-      .post("https://url/check_admin_user", { email: user.email })
+      .post("https://recruitments-portal-backend.vercel.app/admin/check-user", { email: user.email })
       .then((response) => {
         if (response.status === 200) {
-          document.cookie = `email=${user.email}; path=/`;
-          document.cookie = `token=${response.data.accessToken}; path=/`;
-          // Redirect to admin dashboard if user is an admin
+          document.cookie = `email=${user.email}; path=/`
+          document.cookie = `accessToken=${response.data.token}; path=/`
           router.push("/admin/dashboard");
         } else {
           alert("User is not an admin");

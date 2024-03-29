@@ -11,7 +11,7 @@ interface Response {
   questions: { q: string; ans: string; _id: string }[];
 }
 
-const ResponseDetails = ({ email, onClose }: { email: string; onClose: () => void }) => {
+const ResponseDetails =  ({ email, onClose }: { email: string; onClose: () => void }) => {
   const [responseDetails, setResponseDetails] = useState<Response[]>([]);
 
   useEffect(() => {
