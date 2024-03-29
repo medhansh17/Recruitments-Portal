@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 export default function FaqCard(props:{indx:String,question:string,answer:string}){
     return <div
-        className="backdrop-blur-sm flex flex-col  h-[30vh]  md:h-[60vh] rounded-xl opacity-100 bg-white bg-opacity-10 mt-10 mx-5  md:w-[21vw] border-main-blue border-8">
+        className="backdrop-blur-sm flex flex-col  min-h-[30vh]  md:h-[60vh] rounded-xl opacity-100 bg-white bg-opacity-10 mt-10 mx-5  md:w-[21vw] border-main-blue border-8">
         <div className={"flex flex-row justify-center items-center mt-2"}>
             <Image
                 src="/graphics/left-lines.svg"
