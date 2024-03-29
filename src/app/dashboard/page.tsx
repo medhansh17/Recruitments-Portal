@@ -1,9 +1,11 @@
 "use client";
 import Quizcard from "@/components/quizcard";
-import {useEffect, useState} from "react";
+import styles from "./dashboard.module.css";
+import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import Loader from "@/components/loader";
-import styles from "./dashboard.module.css";
+import { redirect } from "next/navigation";
+import { AuthContext } from "@/contexts/auth.context";
 
 type Quiz = {
   completed: boolean;
@@ -47,6 +49,9 @@ export default function Dashboard() {
       .split("; ")
       .find((row) => row.startsWith("accessToken"))
       ?.split("=")[1];
+    if (!emailValue || !accessToken) {
+      redirect("/login");
+    }
     setLoading(true);
     axios
       .get<ResponseData>(
