@@ -3,13 +3,11 @@ import JoinTeam from "@/components/joining-page";
 import ScrollIndicator from "@/components/scrollindicator";
 import Button from "@/components/button";
 import Link from "next/link";
-import {Bounce, toast, ToastContainer} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { useState, useEffect, useContext } from "react";
-import { GetDomains } from "@/api";
+import {useEffect, useState} from "react";
+import {GetDomains} from "@/api";
 import Loader from "@/components/loader";
-import { redirect } from "next/navigation";
-import { AuthContext } from "@/contexts/auth.context";
+import {redirect} from "next/navigation";
+import {Bounce, toast} from "react-toastify";
 
 export default function Teams() {
   
@@ -57,7 +55,6 @@ export default function Teams() {
 
   return (
     <main className="min-h-screen">
-      <ToastContainer />
       {loading ? (
         <Loader visibility={true} /> // Display Loader while data is fetched
       ) : (
