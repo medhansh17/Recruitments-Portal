@@ -3,6 +3,8 @@ import JoinTeam from "@/components/joining-page";
 import ScrollIndicator from "@/components/scrollindicator";
 import Button from "@/components/button";
 import Link from "next/link";
+import {Bounce, toast, ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useState, useEffect, useContext } from "react";
 import { GetDomains } from "@/api";
 import Loader from "@/components/loader";
@@ -29,7 +31,18 @@ export default function Teams() {
     const fetchData = async () => {
       setLoading(true);
       if (!emailValue || !accessToken) {
-        alert("Email or Access Token not found in cookies");
+        toast.error("Email or Access Token not found in cookies", {
+          position: "bottom-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          transition: Bounce,
+        });
+
         setLoading(false);
         return;
       } else {
@@ -44,6 +57,7 @@ export default function Teams() {
 
   return (
     <main className="min-h-screen">
+      <ToastContainer />
       {loading ? (
         <Loader visibility={true} /> // Display Loader while data is fetched
       ) : (
