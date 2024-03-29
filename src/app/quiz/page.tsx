@@ -22,8 +22,6 @@ const Page = () => {
   ));
     useEffect(() => {
         const q = JSON.parse(localStorage.getItem("questions") || "[]");
-        console.log("questions from local storage");
-        console.log(q);
         setAnsArr(Array(q.length).fill(""));
         setArr(Array(q.length).fill(0));
     }, []);

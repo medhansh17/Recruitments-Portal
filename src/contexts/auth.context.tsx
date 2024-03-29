@@ -1,11 +1,14 @@
 "use client";
-import React, { createContext, useContext, useEffect, useState } from "react";
+import { GetDomains } from "@/api";
+import React, { createContext, useEffect, useState } from "react";
 
 interface AuthContextType {
   emailValue: string | undefined;
   accessToken: string | undefined;
   setCookieEmailValue: (email: string) => void;
   setCookieAccessToken: (token: string) => void;
+  setResponseData: (data: any) => void;
+  responseData: {};
 }
 
 export const AuthContext = createContext<AuthContextType>({
@@ -13,6 +16,8 @@ export const AuthContext = createContext<AuthContextType>({
   accessToken: undefined,
   setCookieEmailValue: () => {},
   setCookieAccessToken: () => {},
+  responseData: {},
+  setResponseData: () => {},
 });
 interface AuthProviderProps {
   children: React.ReactNode;
@@ -21,17 +26,15 @@ interface AuthProviderProps {
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [emailValue, setEmailValue] = useState<string | undefined>();
   const [accessToken, setAccessToken] = useState<string | undefined>();
+  const [responseData, setResponseData] = useState<any>();
 
   const setCookieEmailValue = (email: string) => {
     setEmailValue(email);
-    console.log("Email value set to " + email);
   };
   const setCookieAccessToken = (token: string) => {
     setAccessToken(token);
   };
   useEffect(() => {
-    console.log("Medhansh");
-
     const cookieValue = document.cookie
       .split("; ")
       .find((row) => row.startsWith("email"))
@@ -41,11 +44,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       .find((row) => row.startsWith("accessToken"))
       ?.split("=")[1];
     if (cookieValue && accessTokenValue) {
-      console.log("Exist");
       setEmailValue(cookieValue);
       setAccessToken(accessTokenValue);
     }
-  });
+  }, []);
   return (
     <AuthContext.Provider
       value={{
@@ -53,6 +55,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         accessToken,
         setCookieEmailValue,
         setCookieAccessToken,
+        responseData: responseData,
+        setResponseData,
       }}
     >
       {children}

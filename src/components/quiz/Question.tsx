@@ -133,8 +133,7 @@ const Question = ({
         router.push("/dashboard");
       })
       .catch((error) => {
-        console.log("Error in submitting response");
-        console.log(error);
+        throw error;
       });
   };
   return (
