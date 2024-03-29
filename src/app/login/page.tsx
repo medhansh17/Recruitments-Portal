@@ -10,7 +10,6 @@ import {useEffect, useState} from "react";
 import Loader from "@/components/loader";
 import {Bounce, toast} from 'react-toastify';
 
-
 function validateEmail(email:string | null) {
   //email must end with vitstudent.ac.in
   if(typeof email === "undefined" || email === null) return false;
