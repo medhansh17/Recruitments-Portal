@@ -102,9 +102,9 @@ export default function JoinTeam(props: {
         {isShown && (
           <motion.div
             {...dropdownVariants}
-            className="w-full h-screen bg-main-bg inset-0 flex  flex-col justify-around items-center fixed z-40 origin-top"
+            className="w-full h-screen bg-main-bg inset-0 flex  flex-col justify-around items-center fixed z-40 origin-top pb-10 md:pb-0"
           >
-            <div className="w-[95%] h-[70%] flex flex-row  justify-evenly items-center flex-wrap gap-x-[14%]">
+            <div className="w-[95%] h-[70%] flex flex-row  justify-evenly items-center flex-wrap gap-x-[14%] ">
               {props.titles.map((title) => (
                 <motion.div
                   className="hover:cursor-pointer z-0"
