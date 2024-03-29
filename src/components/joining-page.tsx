@@ -121,32 +121,36 @@ export default function JoinTeam(props: {
                 </motion.div>
               ))}
             </div>
-            <Button
-              text="CONFIRM"
-              onClick={() => {
-                onClick(props.teamName);
-                if (emailValue === undefined || accessToken === undefined) {
-                  toast.error("Please login and try", {
-                    position: "bottom-center",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "colored",
-                    transition: Bounce,
-                  });
-                } else {
-                  PutDomains(
-                    selectedDomains,
-                    props.teamName,
-                    emailValue,
-                    accessToken
-                  );
-                }
-              }}
-            />
+            <div className={"flex flex-col items-center text-main-pink font-sarpanch text-2xl mb-2"}>
+              <h1 className={"mb-2"}>Select any 2 subdomains</h1>
+              <Button
+                  text="CONFIRM"
+                  onClick={() => {
+                    onClick(props.teamName);
+                    if (emailValue === undefined || accessToken === undefined) {
+                      toast.error("Please login and try", {
+                        position: "bottom-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                        transition: Bounce,
+                      });
+                    } else {
+                      PutDomains(
+                          selectedDomains,
+                          props.teamName,
+                          emailValue,
+                          accessToken
+                      );
+                    }
+                  }}
+              />
+
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
