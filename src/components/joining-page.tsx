@@ -102,9 +102,9 @@ export default function JoinTeam(props: {
         {isShown && (
           <motion.div
             {...dropdownVariants}
-            className="w-full h-screen bg-main-bg inset-0 flex  flex-col justify-around items-center fixed z-40 origin-top"
+            className="w-full h-screen bg-main-bg inset-0 flex  flex-col justify-around items-center fixed z-40 origin-top pb-10 md:pb-0"
           >
-            <div className="w-[95%] h-[70%] flex flex-row  justify-evenly items-center flex-wrap gap-x-[14%]">
+            <div className="w-[95%] h-[70%] flex flex-row  justify-evenly items-center flex-wrap gap-x-[14%] ">
               {props.titles.map((title) => (
                 <motion.div
                   className="hover:cursor-pointer z-0"
@@ -121,32 +121,36 @@ export default function JoinTeam(props: {
                 </motion.div>
               ))}
             </div>
-            <Button
-              text="CONFIRM"
-              onClick={() => {
-                onClick(props.teamName);
-                if (emailValue === undefined || accessToken === undefined) {
-                  toast.error("Please login and try", {
-                    position: "bottom-center",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "colored",
-                    transition: Bounce,
-                  });
-                } else {
-                  PutDomains(
-                    selectedDomains,
-                    props.teamName,
-                    emailValue,
-                    accessToken
-                  );
-                }
-              }}
-            />
+            <div className={"flex flex-col items-center text-main-pink font-sarpanch text-2xl mb-2"}>
+              <h1 className={"mb-2"}>Select any 2 subdomains</h1>
+              <Button
+                  text="CONFIRM"
+                  onClick={() => {
+                    onClick(props.teamName);
+                    if (emailValue === undefined || accessToken === undefined) {
+                      toast.error("Please login and try", {
+                        position: "bottom-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                        transition: Bounce,
+                      });
+                    } else {
+                      PutDomains(
+                          selectedDomains,
+                          props.teamName,
+                          emailValue,
+                          accessToken
+                      );
+                    }
+                  }}
+              />
+
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

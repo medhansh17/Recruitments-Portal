@@ -2,6 +2,7 @@
 import {useRef} from "react";
 import {motion, useInView} from "framer-motion";
 
+
 export default function Button(props: { onClick?: Function; text: string }) {
   const Ref = useRef(null);
   const inView = useInView(Ref, { amount: 0.5, once: false });
