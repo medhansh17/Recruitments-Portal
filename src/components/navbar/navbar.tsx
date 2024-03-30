@@ -88,7 +88,7 @@ export default function Nav() {
           </AnimatePresence>
         )}
         <div id="logo" className="size-16 ml-[5%] z-[31]">
-            <Image src="/logo.svg" alt="IEEECS Logo" width={100} height={100} />
+            <Image quality={100} src="/logo.svg" alt="IEEECS Logo" width={100} height={100} />
         </div>
         <button
           className={`${
@@ -124,7 +124,8 @@ export default function Nav() {
             text="Dashboard"
             active={pathname === "/dashboard"}
           />
-          <Link href="https://discord.gg/swF4utKTk4">
+          <Link href="">
+            {/*Update discord link in href above*/}
             <li className="text-white text-2xl mx-5">
               <img src="/discordlogo.svg" alt="Discord Logo"></img>
             </li>
