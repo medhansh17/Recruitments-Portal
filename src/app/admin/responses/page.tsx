@@ -17,7 +17,23 @@ const StudentResponses: React.FC = () => {
 
   const fetchData = async (domain: string) => {
     try {
-      const response = await axios.get(`https://recruitments-portal-backend.vercel.app/${domain}`);
+      const emailValue = document.cookie
+          .split('; ')
+          .find(row => row.startsWith('email'))
+          ?.split('=')[1];
+
+        const accessToken = document.cookie
+          .split('; ')
+          .find(row => row.startsWith('accessToken'))
+          ?.split('=')[1];
+          console.log(accessToken);
+          
+          const response = await axios.get(`https://recruitments-portal-backend.vercel.app/${domain}`, {
+            headers: {
+              Authorization: `Bearer ${accessToken}`
+            }
+          });
+
       setResponses(response.data);
     } catch (error) {
       toast.error('Error fetching data', {
