@@ -7,7 +7,7 @@ import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 export const metadata: Metadata = {
-  title: "IEEE-CS Recruitments Portal 2024",
+  title: "IEEE-CS Enrollments Portal 2024",
   description: "Portal for the new junior core to select their domains",
   themeColor: "#150b23",
 };
