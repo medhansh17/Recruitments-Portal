@@ -3,14 +3,13 @@ import JoinTeam from "@/components/joining-page";
 import ScrollIndicator from "@/components/scrollindicator";
 import Button from "@/components/button";
 import Link from "next/link";
-import {useEffect, useState} from "react";
-import {GetDomains} from "@/api";
+import { useEffect, useState } from "react";
+import { GetDomains } from "@/api";
 import Loader from "@/components/loader";
-import {redirect} from "next/navigation";
-import {Bounce, toast} from "react-toastify";
+import { redirect } from "next/navigation";
+import { Bounce, toast } from "react-toastify";
 
 export default function Teams() {
-  
   const [loading, setLoading] = useState<boolean>(true);
   const [data, setData] = useState<any>({});
 
@@ -62,7 +61,7 @@ export default function Teams() {
           <JoinTeam
             teamName="Management"
             order="1"
-            titles={["P&M", "Editotrial", "Events"]}
+            titles={["P&M", "Editorial", "Events"]}
             selectedDomains={
               data.management?.map((item: any) => item.subdomain) || []
             }
