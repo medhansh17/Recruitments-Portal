@@ -12,9 +12,22 @@ interface Response {
   questions: { q: string; ans: string; _id: string }[];
 }
 
-const ResponseDetails =  ({ email, onClose }: { email: string; onClose: () => void }) => {
+const ResponseDetails =  ({ email, onClose , domain }: { email: string; onClose: () => void , domain:string}) => {
   const [responseDetails, setResponseDetails] = useState<Response[]>([]);
-
+  if (domain === "" ){
+    toast.error('Domain not found', {
+      position: "bottom-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      transition: Bounce,
+    });
+    onClose();
+  }
   useEffect(() => {
     const fetchResponseDetails = async () => {
       try {
@@ -25,7 +38,7 @@ const ResponseDetails =  ({ email, onClose }: { email: string; onClose: () => vo
 
         const accessToken = document.cookie
           .split('; ')
-          .find(row => row.startsWith('accessToken'))
+          .find(row => row.startsWith('adminaccessToken'))
           ?.split('=')[1];
 
         if (!emailValue || !accessToken) {
@@ -51,6 +64,7 @@ const ResponseDetails =  ({ email, onClose }: { email: string; onClose: () => vo
             email: emailValue
           }
         });
+
         setResponseDetails(response.data);
       } catch (error) {
           toast.error('Error fetching response details:', {
@@ -72,31 +86,33 @@ const ResponseDetails =  ({ email, onClose }: { email: string; onClose: () => vo
   }, [email]);
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex justify-center items-center z-50">
-      <div className="bg-white p-4 rounded-md relative overflow-y-auto">
-        <button className="absolute top-2 right-2 text-gray-500 hover:text-red-500" onClick={onClose}>
+    <div className="fixed w-screen h-screen bg-gray-800 bg-opacity-50 flex justify-center items-center z-50 overflow-auto">
+      <div className="bg-white p-4 rounded-md overflow-y-auto   w-full h-full">
+        <button className="right-[10px] text-gray-500 hover:text-red-500" onClick={onClose}>
           X
         </button>
-        <h2 className="text-xl font-bold mb-4">Response Details</h2>
+        <h2 className="text-xl font-bold mb-4 ">Response Details</h2>
         <div>
-          {responseDetails.map(response => (
-            <div key={response._id} className="mb-4">
-              <p>Email: {response.email}</p>
-              <p>Domain: {response.domain}</p>
-              <p>Start Time: {response.startTime}</p>
-              <p>Submission Time: {response.submissionTime || 'Not submitted'}</p>
-              <p>End Time: {response.endTime}</p>
-              <h3>Questions:</h3>
-              <ul>
-                {response.questions.map(question => (
-                  <li key={question._id}>
-                    <strong>{question.q}</strong>
-                    <p>Answer: {question.ans}</p>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {responseDetails
+            .filter(response => response.domain === domain)
+            .map(response => (
+              <div key={response._id} className="mb-4 overflow-y-auto">
+                <p>Email: {response.email}</p>
+                <p>Domain: {response.domain}</p>
+                <p>Start Time: {response.startTime}</p>
+                <p>Submission Time: {response.submissionTime || 'Not submitted'}</p>
+                <p>End Time: {response.endTime}</p>
+                <h3>Questions:</h3>
+                <ul>
+                  {response.questions.map(question => (
+                    <li key={question._id}>
+                      <strong>{question.q}</strong>
+                      <p>Answer: {question.ans}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
         </div>
       </div>
     </div>

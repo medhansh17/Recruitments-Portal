@@ -4,12 +4,15 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import ResponseDetails from "./ResponseDetails";
 import { Bounce, toast } from "react-toastify";
+import { set } from 'firebase/database';
 
 const Button = dynamic(() => import("@/components/button"), { ssr: false });
 
 const StudentResponses: React.FC = () => {
   const [responses, setResponses] = useState<any[]>([]);
   const [selectedEmail, setSelectedEmail] = useState<string | null>(null);
+  const [selectedDomain, setSelectedDomainl] = useState<string>("");
+
 
   useEffect(() => {
     fetchData("web"); // Fetch data for 'web' domain initially
@@ -24,7 +27,7 @@ const StudentResponses: React.FC = () => {
 
       const accessToken = document.cookie
         .split("; ")
-        .find((row) => row.startsWith("accessToken"))
+        .find((row) => row.startsWith("adminaccessToken"))
         ?.split("=")[1];
       console.log(accessToken);
 
@@ -38,6 +41,7 @@ const StudentResponses: React.FC = () => {
       );
 
       setResponses(response.data);
+      setSelectedDomainl(domain);
     } catch (error) {
       toast.error("Error fetching data", {
         position: "bottom-center",
@@ -62,7 +66,7 @@ const StudentResponses: React.FC = () => {
   };
   return (
     <div className="flex justify-between h-screen flex-wrap">
-      <div className="flex flex-col items-start mr-10 w-[50%] h-screen flex-wrap mt-[8%]">
+      <div className="flex flex-col items-start mr-10 w-[50%] h-[110vh] flex-wrap mt-[8%]">
         <Button onClick={() => fetchData("web")} text="Web" />
         <Button onClick={() => fetchData("aiml")} text="AIML" />
         <Button onClick={() => fetchData("app")} text="App" />
@@ -75,7 +79,7 @@ const StudentResponses: React.FC = () => {
         <Button onClick={() => fetchData("editorial")} text="Editorial" />
         <Button onClick={() => fetchData("events")} text="Events" />
       </div>
-      <div className="overflow-y-auto max-h-96 w-[45%] bg-gray-100 p-4 rounded-md  mt-[8%]">
+      <div className="overflow-y-auto max-h-96 w-[35%] bg-gray-100 p-4 rounded-md  mt-[8%] mx-auto h-[200px]">
         <h2 className="text-xl font-bold mb-4 ">Responses</h2>
         <div>
           {responses.slice(0, 10).map((response, index) => (
@@ -91,7 +95,7 @@ const StudentResponses: React.FC = () => {
         </div>
       </div>
       {selectedEmail && (
-        <ResponseDetails email={selectedEmail} onClose={handleCloseDetails} />
+        <ResponseDetails email={selectedEmail} domain = {selectedDomain} onClose={handleCloseDetails} />
       )}
     </div>
   );

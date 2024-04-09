@@ -1,18 +1,18 @@
 'use client';
 
 import Button from "@/components/button";
-import {firebaseConfig} from "@/firebase.config"
-import {initializeApp} from "firebase/app";
-import {getAuth, GoogleAuthProvider, signInWithPopup, signOut, User} from "firebase/auth";
+import { firebaseConfig } from "@/firebase.config"
+import { initializeApp } from "firebase/app";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, User } from "firebase/auth";
 import axios from "axios";
-import {useRouter} from "next/navigation";
-import {useEffect, useState} from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import Loader from "@/components/loader";
-import {Bounce, toast} from 'react-toastify';
+import { Bounce, toast } from 'react-toastify';
 
-function validateEmail(email:string | null) {
+function validateEmail(email: string | null) {
   //email must end with vitstudent.ac.in
-  if(typeof email === "undefined" || email === null) return false;
+  if (typeof email === "undefined" || email === null) return false;
   if (email.endsWith("@vitstudent.ac.in")) {
     return true;
   } else {
@@ -22,12 +22,12 @@ function validateEmail(email:string | null) {
 
 export default function Login() {
 
-    function removeLoader(){
-        setTimeout(() => {
-            setLoading(false)
+  function removeLoader() {
+    setTimeout(() => {
+      setLoading(false)
 
-        }, 1000);
-    }
+    }, 1000);
+  }
   const router = useRouter();
 
   const [loading, setLoading] = useState(false);
@@ -40,20 +40,33 @@ export default function Login() {
   }, [router]);
 
 
-  function verifyEmailinDB(user:User){
-      axios.post('https://recruitments-portal-backend.vercel.app/check_user', {
-        email: user.email
-      }).then((response) => {
-        if(response.status === 200){
-          //create cookie of user email and response.data.accessToken
+  function verifyEmailinDB(user: User) {
+    axios
+      .post("https://recruitments-portal-backend.vercel.app/admin/check-user", { email: user.email })
+      .then((response) => {
+        if (response.status === 200) {
           document.cookie = `email=${user.email}; path=/`
-          document.cookie = `accessToken=${response.data.accessToken}; path=/`
-            removeLoader()
-          router.push("/")
+          document.cookie = `adminaccessToken=${response.data.token}; path=/`
+          router.push("/admin/dashboard");
+        }else{
           
-      }
-      else{
-            toast.error("Email not registered for IEEE-CS", {
+        }
+      }).catch((error) => {
+        console.log(error);})
+        
+        axios.post('https://recruitments-portal-backend.vercel.app/check_user', {
+            email: user.email
+          }).then((response) => {
+            if (response.status === 200) {
+              //create cookie of user email and response.data.accessToken
+              document.cookie = `email=${user.email}; path=/`
+              document.cookie = `accessToken=${response.data.accessToken}; path=/`
+              removeLoader()
+              router.push("/")
+
+            }
+            else {
+              toast.error("Email not registered for IEEE-CS", {
                 position: "bottom-center",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -63,32 +76,34 @@ export default function Login() {
                 progress: undefined,
                 theme: "colored",
                 transition: Bounce,
-            });
+              });
 
-            removeLoader()
+              removeLoader()
 
-        }
-    })
-      .catch((error) => {
-          toast.error(error.message, {
-              position: "bottom-center",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "colored",
-              transition: Bounce,
-          });
-          removeLoader()
+            }
+          })
+            .catch((error) => {
+              toast.error(error.message, {
+                position: "bottom-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Bounce,
+              });
+              removeLoader()
 
-      })
+            })
+        
+
   }
 
 
 
-  function handleLogin(){
+  function handleLogin() {
     setLoading(true);
     const app = initializeApp(firebaseConfig);
     const provider = new GoogleAuthProvider();
@@ -101,21 +116,21 @@ export default function Login() {
     const auth = getAuth(app);
     signInWithPopup(auth, provider)
       .then((result) => {
-        const credential:any = GoogleAuthProvider.credentialFromResult(result);
+        const credential: any = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
         const user = result.user;
-        if(!validateEmail(user.email)){
-            toast.error("Please login with your VIT email", {
-                position: "bottom-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-                transition: Bounce,
-            });
+        if (!validateEmail(user.email)) {
+          toast.error("Please login with your VIT email", {
+            position: "bottom-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            transition: Bounce,
+          });
 
           signOut(auth);
         }
@@ -126,18 +141,18 @@ export default function Login() {
         const errorMessage = error.message;
         removeLoader()
         toast.error(errorMessage, {
-            position: "bottom-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-            transition: Bounce,
+          position: "bottom-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          transition: Bounce,
         });
 
-    });
+      });
 
   }
   return (
@@ -155,7 +170,7 @@ export default function Login() {
         />
         <Button text="Sign in with Google" onClick={handleLogin} />
       </div>
-        <Loader visibility={loading} />
+      <Loader visibility={loading} />
     </div>
   );
 }
