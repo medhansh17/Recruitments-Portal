@@ -1,8 +1,23 @@
 'use client';
-
+import Loader from '@/components/loader';
 import Link from 'next/link';
+import { useEffect, } from 'react';
 
 export default function AdminDashboard() {
+    useEffect(() => {
+        
+        try {
+            const accessTokenValue = document.cookie
+            .split("; ")
+            .find((row) => row.startsWith("adminaccessToken"))
+            ?.split("=")[1];
+            if (!accessTokenValue) {
+                window.location.href = "/admin"
+            }
+        } catch (error) {
+            window.location.href = "/admin";
+        }
+    },[])
 return (
     <div className="flex flex-col h-screen">
         <header className="bg-gray-800 text-white py-4 px-6 flex justify-between items-center">
