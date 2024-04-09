@@ -87,7 +87,7 @@ export default function Button(props: { onClick?: Function; text: string }) {
               variants={animationOnViewText}
               initial="hidden"
               animate={inView ? "visible" : "hidden"}
-              className="text-main-pink drop-shadow-xl text-2xl sm:text-[1.75rem]  absolute left-[50%] translate-x-[-50%] w-full text-center group-hover:scaleY-110 duration-[300ms] ease-in"
+              className="font-sarpanch text-main-pink drop-shadow-xl text-2xl sm:text-[1.75rem]  absolute left-[50%] translate-x-[-50%] w-full text-center group-hover:scaleY-110 duration-[300ms] ease-in"
           >
             {props.text}
             <span

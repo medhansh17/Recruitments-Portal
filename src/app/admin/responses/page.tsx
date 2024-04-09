@@ -65,7 +65,9 @@ const StudentResponses: React.FC = () => {
     setSelectedEmail(null);
   };
   return (
-    <div className="flex justify-between h-screen flex-wrap">
+    <>
+      <button className="text-white border-2 border-white top-5 left-5 fixed p-5">Back</button>
+      <div className="flex justify-between h-screen flex-wrap">
       <div className="flex flex-col items-start mr-10 w-[50%] h-[110vh] flex-wrap mt-[8%]">
         <Button onClick={() => fetchData("web")} text="Web" />
         <Button onClick={() => fetchData("aiml")} text="AIML" />
@@ -79,7 +81,7 @@ const StudentResponses: React.FC = () => {
         <Button onClick={() => fetchData("editorial")} text="Editorial" />
         <Button onClick={() => fetchData("events")} text="Events" />
       </div>
-      <div className="overflow-y-auto max-h-96 w-[35%] bg-gray-100 p-4 rounded-md  mt-[8%] mx-auto h-[200px]">
+      <div className="overflow-y-auto h-[80vh] max-h-96 w-[35%] bg-gray-100 p-4 rounded-md  mt-[8%] mx-auto">
         <h2 className="text-xl font-bold mb-4 ">Responses</h2>
         <div>
           {responses.slice(0, 10).map((response, index) => (
@@ -98,6 +100,8 @@ const StudentResponses: React.FC = () => {
         <ResponseDetails email={selectedEmail} domain = {selectedDomain} onClose={handleCloseDetails} />
       )}
     </div>
+</>
+
   );
 };
 
