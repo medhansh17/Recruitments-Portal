@@ -43,7 +43,7 @@ export default function Nav() {
   return (
     <>
       <nav
-        className={` flex flex-row justify-between items-center fixed py-5 w-full z-[31]`}
+        className={`${pathname.startsWith("/admin")?"hidden":"flex"} flex-row justify-between items-center fixed py-5 w-full z-[31]`}
       >
         {isShown && (
           <AnimatePresence>
@@ -92,7 +92,7 @@ export default function Nav() {
         </div>
         <button
           className={`${
-            pathname === "/login" || pathname.startsWith("/admin")
+            pathname === "/login"
               ? "hidden"
               : "visible"
           } md:hidden inline-block hamburger hamburger--spring z-[31]`}
