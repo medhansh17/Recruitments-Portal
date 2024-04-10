@@ -7,7 +7,7 @@ import axios from "axios";
 import Button from "@/components/button";
 
 export default function Profile(){
-    const [photosrc, setPhotosrc] = useState<string>('')
+    const [photosrc, setPhotosrc] = useState<string | undefined>('')
     const [details, setDetails] = useState<any>({Domains: {management: [], tech: [], design: []}})
     
     const router = useRouter();
@@ -84,7 +84,7 @@ export default function Profile(){
 
         </div>
         <div className="flex justify-center w-full mt-10">
-          <Button text="Logout" onClick={() => handleSignout()}>Logout</Button>
+          <Button text="Logout" onClick={handleSignout}/>
           </div>
       </section>
     </main>
