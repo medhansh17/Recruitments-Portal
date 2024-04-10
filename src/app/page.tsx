@@ -53,7 +53,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="min-h-screen snap-y snap-mandatory overflow-y-scroll overscroll-behavior-none">
+    <main className="px-3 min-h-screen snap-y snap-mandatory overflow-y-scroll overscroll-behavior-none">
       <Suspense fallback={<Loading />}>
         <div className="snap-center h-screen">
           <Hero />

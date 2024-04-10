@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import ResponseDetails from "./ResponseDetails";
 import { Bounce, toast } from "react-toastify";
-import { set } from "firebase/database";
 
 const Button = dynamic(() => import("@/components/button"), { ssr: false });
 
@@ -70,7 +69,7 @@ const StudentResponses: React.FC = () => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "colored",
+        theme: "dark",
         transition: Bounce,
       });
     }
