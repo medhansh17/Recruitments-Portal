@@ -19,7 +19,7 @@ export default function Hero() {
             className="w-1/4 h-auto"
           />
         </div>
-        <h1 className="text-6xl md:text-8xl text-center">ENROLLMENTS</h1>
+        <h1 className="text-5xl md:text-8xl text-center">ENROLLMENTS</h1>
       </div>
       <div className=" md:visible flex flex-col items-center justify-center font-sarpanch text-2xl my-10">
         Introducing the best chapter
