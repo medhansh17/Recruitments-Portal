@@ -124,8 +124,7 @@ export default function Nav() {
             text="Dashboard"
             active={pathname === "/dashboard"}
           />
-          <Link href="">
-            {/*Update discord link in href above*/}
+          <Link href="https://discord.gg/TzSrx4Hepa">
             <li className="text-white text-2xl mx-5">
               <img src="/discordlogo.svg" alt="Discord Logo"></img>
             </li>
