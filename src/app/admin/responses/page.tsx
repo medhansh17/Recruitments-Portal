@@ -28,9 +28,9 @@ const StudentResponses: React.FC = () => {
     }
   }, []);
 
-  if (!show) {
-    return null;
-  }
+  // if (!show) {
+  //   return null;
+  // }
   
   useEffect(() => {
     fetchData("web"); // Fetch data for 'web' domain initially
