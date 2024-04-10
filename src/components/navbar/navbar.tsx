@@ -93,7 +93,9 @@ export default function Nav() {
           </AnimatePresence>
         )}
         <div id="logo" className="size-16 ml-[5%] z-[31]">
+          <Link href={`${pathname==="/login"?"/login":"/"}`}>          
             <Image quality={100} src="/logo.svg" alt="IEEECS Logo" width={100} height={100} />
+          </Link>
         </div>
         <button
           className={`${
