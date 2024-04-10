@@ -23,7 +23,7 @@ const ResponseDetails =  ({ email, onClose , domain }: { email: string; onClose:
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      theme: "colored",
+      theme: "dark",
       transition: Bounce,
     });
     onClose();
@@ -50,7 +50,7 @@ const ResponseDetails =  ({ email, onClose , domain }: { email: string; onClose:
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "colored",
+            theme: "dark",
             transition: Bounce,
           });
           return;
@@ -75,7 +75,7 @@ const ResponseDetails =  ({ email, onClose , domain }: { email: string; onClose:
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "colored",
+          theme: "dark",
           transition: Bounce,
         });
 

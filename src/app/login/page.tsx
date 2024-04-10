@@ -74,7 +74,7 @@ export default function Login() {
                 pauseOnHover: true,
                 draggable: true,
                 progress: undefined,
-                theme: "colored",
+                theme: "dark",
                 transition: Bounce,
               });
 
@@ -91,7 +91,7 @@ export default function Login() {
                 pauseOnHover: true,
                 draggable: true,
                 progress: undefined,
-                theme: "colored",
+                theme: "dark",
                 transition: Bounce,
               });
               removeLoader()
@@ -128,7 +128,7 @@ export default function Login() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "colored",
+            theme: "dark",
             transition: Bounce,
           });
 
@@ -148,7 +148,7 @@ export default function Login() {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "colored",
+          theme: "dark",
           transition: Bounce,
         });
 

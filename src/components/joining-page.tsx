@@ -136,7 +136,7 @@ export default function JoinTeam(props: {
                         pauseOnHover: true,
                         draggable: true,
                         progress: undefined,
-                        theme: "colored",
+                        theme: "dark",
                         transition: Bounce,
                       });
                     } else {

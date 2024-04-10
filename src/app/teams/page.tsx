@@ -36,7 +36,7 @@ export default function Teams() {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "colored",
+          theme: "dark",
           transition: Bounce,
         });
 

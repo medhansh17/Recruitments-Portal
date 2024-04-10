@@ -49,7 +49,7 @@ export function HamNavLinkLogout({ text, active,setIsShown, handleLogout }: any)
         <button className={"fixed bottom-0"}   onClick={() => handleClick()}>
             <p
                 className={`${
-                    active ? "text-main-blue" : "text-white"
+                    active ? "text-main-blue" : "text-red-600"
                 } md:text-6xl text-4xl  mx-5 w-screen text-center my-5 font-striger`}
             >
                 {text}

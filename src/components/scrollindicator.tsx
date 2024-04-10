@@ -1,6 +1,6 @@
 "use client";
 
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import {motion} from "framer-motion";
 
 interface BounceAnimationProps {
@@ -25,6 +25,44 @@ const bounceAnimation: BounceAnimationProps = {
 
 export default function ScrollIndicator() {
   const [orientation, setOrientation] = useState<boolean>(true);
+  const [direction, setDirection] = useState<boolean>(true);
+
+
+  function handleScroll() {
+
+    if(window.scrollY + window.innerHeight > document.body.scrollHeight - 100){
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      })
+
+    }
+    else{
+      window.scrollTo({
+        top: window.scrollY + window.innerHeight,
+        behavior: "smooth",
+      })
+    }
+
+  }
+
+  useEffect(() => {
+    function handleScrollDirection() {
+      if (window.scrollY + window.innerHeight >= document.body.scrollHeight) {
+        setDirection(false);
+      } else {
+        setDirection(true);
+      }
+    }
+
+    window.addEventListener("scroll", handleScrollDirection);
+
+    return () => {
+      window.removeEventListener("scroll", handleScrollDirection);
+    };
+  }, []);
+
+
 
   return (
       <motion.div
@@ -37,14 +75,12 @@ export default function ScrollIndicator() {
                   ? "/graphics/scrollindicator.svg"
                   : "/graphics/scrollindicator-rot.svg"
             }
+            className={`${direction ? "rotate-0" : "rotate-180"} $`}
             alt="scroll-indicator"
             width={50}
             height={50}
             onClick={() =>
-                window.scrollTo({
-                  top: window.scrollY + window.innerHeight,
-                  behavior: "smooth",
-                })
+              handleScroll()
             }
             onMouseOver={() => setOrientation(false)}
             onMouseOut={() => setOrientation(true)}
