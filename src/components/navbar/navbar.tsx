@@ -32,6 +32,11 @@ export default function Nav() {
     document.cookie = "accessToken=; path=/";
     router.push("/login");
   }
+
+  function handleProfile(){
+    router.push("/profile");
+  }
+
   const toggleNav = () => {
     setIsShown(!isShown);
     if (typeof window !== "undefined" && !isShown) {
@@ -131,13 +136,13 @@ export default function Nav() {
           </Link>
         </ul>
         <div
-          id="logout"
+          id="profile"
           className={`hidden ${
             pathname === "/login" ? "md:hidden" : "md:block"
           } size-14   mr-[5%] hover:cursor-pointer`}
-          onClick={handleSignout}
+          onClick={handleProfile}
         >
-          <Image src="/logout.png" alt="Logout button" width={50} height={50} />
+          <Image src="/profile.png" alt="Profile button" width={50} height={50} />
         </div>
       </nav>
     </>
