@@ -80,6 +80,7 @@ const StudentResponses: React.FC = () => {
   };
 
   const handleCloseDetails = () => {
+    fetchData(selectedDomain);
     setSelectedEmail(null);
   };
   return (
