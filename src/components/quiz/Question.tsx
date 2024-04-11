@@ -101,33 +101,19 @@ const Question = ({
       });
     }
     setLoading(true);
-    axios
-      .post(
-        `https://recruitments-portal-backend.vercel.app/question/${localStorage.getItem(
-          "domain"
-        )}/${emailValue}`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      )
-      .then((_) => {
-        axios.patch(
-          `https://recruitments-portal-backend.vercel.app/response/submit`,
-          {
-            email: emailValue,
-            domain: JSON.parse(localStorage.getItem("domain") || "").toString(),
-            questions: anwArray,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          }
-        );
-      })
+    axios.patch(
+      `https://recruitments-portal-backend.vercel.app/response/submit`,
+      {
+        email: emailValue,
+        domain: JSON.parse(localStorage.getItem("domain") || "").toString(),
+        questions: anwArray,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    )
       .then((_) => {
         setLoading(false);
         router.push("/dashboard");
