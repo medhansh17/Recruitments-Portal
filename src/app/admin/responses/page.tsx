@@ -28,13 +28,27 @@ const StudentResponses: React.FC = () => {
     }
   }, []);
 
-  // if (!show) {
-  //   return null;
-  // }
-  
   useEffect(() => {
-    fetchData("web"); // Fetch data for 'web' domain initially
-  }, []); // Empty dependency array to ensure useEffect runs only once
+    try {
+      const accessTokenValue = document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("adminaccessToken"))
+        ?.split("=")[1];
+      if (!accessTokenValue) {
+        window.location.href = "/admin";
+        return;
+      }
+      setShow(true);
+    } catch (error) {
+      window.location.href = "/admin";
+    }
+
+    if (!show) {
+      return;
+    }
+
+    fetchData("web");
+  }, [show]);
 
   const fetchData = async (domain: string) => {
     try {
@@ -130,4 +144,3 @@ const StudentResponses: React.FC = () => {
 };
 
 export default StudentResponses;
-

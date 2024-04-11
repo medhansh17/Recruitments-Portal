@@ -19,13 +19,11 @@ export default function Home() {
   } = useContext(AuthContext);
 
   useEffect(() => {
-    // Check if the router is available
     if (!router) return;
-
-    // Your router-related logic here
   }, [router]);
 
   useEffect(() => {
+    document.body.style.overflow = "auto";
     const checkCookie = () => {
       const cookieValue = document.cookie
         .split("; ")
@@ -52,24 +50,25 @@ export default function Home() {
     checkCookie();
   }, []);
 
-  return (<>
-    <main className="px-2 min-h-screen overflow-y-scroll">
-      <Suspense fallback={<Loading />}>
-        <div className="snap-center h-screen">
-          <Hero />
-        </div>
-        <div className="hidden md:visible snap-center h-screen">
-          <Welcome />
-        </div>
-        <div className="snap-center h-[50vh] flex items-center justify-center">
-          <Button
-            text={"Choose Domains"}
-            onClick={() => router.push("/teams")}
-          />
-        </div>
-      </Suspense>
-    </main>
-    <ScrollIndicator/>
+  return (
+    <>
+      <main className="px-2 min-h-screen overflow-y-scroll">
+        <Suspense fallback={<Loading />}>
+          <div className="snap-center h-screen">
+            <Hero />
+          </div>
+          <div className="hidden md:visible snap-center h-screen">
+            <Welcome />
+          </div>
+          <div className="snap-center h-[50vh] flex items-center justify-center">
+            <Button
+              text={"Choose Domains"}
+              onClick={() => router.push("/teams")}
+            />
+          </div>
+        </Suspense>
+      </main>
+      <ScrollIndicator />
     </>
   );
 }

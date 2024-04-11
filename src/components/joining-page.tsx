@@ -1,13 +1,13 @@
 "use client";
 
-import {AnimatePresence, motion} from "framer-motion";
-import {useContext, useEffect, useState} from "react";
-import {AuthContext} from "../contexts/auth.context";
+import { AnimatePresence, motion } from "framer-motion";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../contexts/auth.context";
 import Button from "./button";
 import Header from "./header";
 import SubHeader from "./subdomain-header";
-import {PutDomains} from "@/api";
-import {Bounce, toast} from "react-toastify";
+import { PutDomains } from "@/api";
+import { Bounce, toast } from "react-toastify";
 
 const dropdownVariants = {
   key: "div",
@@ -29,7 +29,7 @@ export default function JoinTeam(props: {
   titles: string[];
   selectedDomains: string[];
 }) {
-  const { emailValue, accessToken, responseData } = useContext(AuthContext);
+  const { emailValue, accessToken } = useContext(AuthContext);
   const [selectedDomains, setSelectedDomains] = useState<string[]>(
     props.selectedDomains
   );
@@ -121,35 +121,38 @@ export default function JoinTeam(props: {
                 </motion.div>
               ))}
             </div>
-            <div className={"flex flex-col items-center text-main-pink font-sarpanch text-2xl mb-2"}>
+            <div
+              className={
+                "flex flex-col items-center text-main-pink font-sarpanch text-2xl mb-2"
+              }
+            >
               <h1 className={"mb-2"}>Select any 2 subdomains</h1>
               <Button
-                  text="CONFIRM"
-                  onClick={() => {
-                    onClick(props.teamName);
-                    if (emailValue === undefined || accessToken === undefined) {
-                      toast.error("Please login and try", {
-                        position: "bottom-center",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "dark",
-                        transition: Bounce,
-                      });
-                    } else {
-                      PutDomains(
-                          selectedDomains,
-                          props.teamName,
-                          emailValue,
-                          accessToken
-                      );
-                    }
-                  }}
+                text="CONFIRM"
+                onClick={() => {
+                  onClick(props.teamName);
+                  if (emailValue === undefined || accessToken === undefined) {
+                    toast.error("Please login and try", {
+                      position: "bottom-center",
+                      autoClose: 5000,
+                      hideProgressBar: false,
+                      closeOnClick: true,
+                      pauseOnHover: true,
+                      draggable: true,
+                      progress: undefined,
+                      theme: "colored",
+                      transition: Bounce,
+                    });
+                  } else {
+                    PutDomains(
+                      selectedDomains,
+                      props.teamName,
+                      emailValue,
+                      accessToken,
+                    );
+                  }
+                }}
               />
-
             </div>
           </motion.div>
         )}

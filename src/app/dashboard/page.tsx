@@ -1,11 +1,10 @@
 "use client";
 import Quizcard from "@/components/quizcard";
 import styles from "./dashboard.module.css";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import Loader from "@/components/loader";
 import { redirect } from "next/navigation";
-import { AuthContext } from "@/contexts/auth.context";
 
 type Quiz = {
   completed: boolean;
@@ -38,8 +37,7 @@ export default function Dashboard() {
   }
 
   useEffect(() => {
-    // fetch all quizzes from backend
-    // get email from cookie
+    document.body.style.overflow = "auto";
     const emailValue = document.cookie
       .split("; ")
       .find((row) => row.startsWith("email"))
@@ -97,11 +95,10 @@ export default function Dashboard() {
       })
       .catch((error) => {
         removeLoader();
-        // handle the error here
+        console.log(error);
       });
   }, []);
 
-  // @ts-ignore
   return (
     <>
       <main className="pt-24 md:pt-20 min-h-screen">
@@ -110,7 +107,9 @@ export default function Dashboard() {
             <h1 className="ml-5 text-white text-center md:text-left font-striger text-3xl">
               Pending Quizzes
             </h1>
-            <div className={` flex flex-col md:flex-row md:overflow-x-auto my-2 ${styles.scrollContainer}`}>
+            <div
+              className={` flex flex-col md:flex-row md:overflow-x-auto my-2 ${styles.scrollContainer}`}
+            >
               {techsub_pending.length === 0 &&
               managementsub_pending.length === 0 &&
               designsub_pending.length === 0 ? (
@@ -153,7 +152,9 @@ export default function Dashboard() {
             <h1 className="ml-5 text-white text-center md:text-left font-striger text-3xl">
               Completed Quizzes
             </h1>
-            <div className={`flex flex-col md:flex-row md:overflow-x-auto my-2  ${styles.scrollContainer}`}>
+            <div
+              className={`flex flex-col md:flex-row md:overflow-x-auto my-2  ${styles.scrollContainer}`}
+            >
               {techsub_completed.length === 0 &&
               managementsub_completed.length === 0 &&
               designsub_completed.length === 0 ? (
