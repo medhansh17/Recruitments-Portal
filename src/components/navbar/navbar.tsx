@@ -1,11 +1,11 @@
 "use client";
 import Link from "next/link";
-import {AnimatePresence, motion} from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import "./hamburger.css";
-import {HamNavLink, HamNavLinkLogout, Navlink} from "../navlink";
-import {usePathname, useRouter} from "next/navigation";
+import { HamNavLink, HamNavLinkLogout, Navlink } from "../navlink";
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
-import {useState} from "react";
+import { useState } from "react";
 
 const dropdownVariants = {
   key: "div",
@@ -48,7 +48,9 @@ export default function Nav() {
   return (
     <>
       <nav
-        className={`${pathname.startsWith("/admin")?"hidden":"flex"} flex-row justify-between items-center fixed py-5 w-full z-[31]`}
+        className={`${
+          pathname.startsWith("/admin") ? "hidden" : "flex"
+        } flex-row justify-between items-center fixed py-5 w-full z-[31]`}
       >
         {isShown && (
           <AnimatePresence>
@@ -92,6 +94,7 @@ export default function Nav() {
                     text={"Logout"}
                     setIsShown={setIsShown}
                     handleLogout={handleSignout}
+                    red={true}
                   />
                 </div>
               </div>
@@ -105,9 +108,7 @@ export default function Nav() {
         </div>
         <button
           className={`${
-            pathname === "/login"
-              ? "hidden"
-              : "visible"
+            pathname === "/login" ? "hidden" : "visible"
           } md:hidden inline-block hamburger hamburger--spring z-[31]`}
           type="button"
           onClick={() => {

@@ -43,9 +43,16 @@ export default function Teams() {
         setLoading(false);
         return;
       } else {
-        const data = await GetDomains(emailValue, accessToken);
-        setData(data);
-        setLoading(false);
+        if (localStorage.getItem("domains")) {
+          setData(JSON.parse(localStorage.getItem("domains") || "{}"));
+          setLoading(false);
+          return;
+        } else {
+          const data = await GetDomains(emailValue, accessToken);
+          setData(data);
+          localStorage.setItem("domains", JSON.stringify(data));
+          setLoading(false);
+        }
       }
     };
 
@@ -55,7 +62,7 @@ export default function Teams() {
   return (
     <main className="min-h-screen">
       {loading ? (
-        <Loader visibility={true} /> // Display Loader while data is fetched
+        <Loader visibility={true} /> 
       ) : (
         <>
           <JoinTeam
@@ -73,6 +80,7 @@ export default function Teams() {
             selectedDomains={
               data.tech?.map((item: any) => item.subdomain) || []
             }
+         
           />
           <JoinTeam
             teamName="Design"
@@ -81,6 +89,7 @@ export default function Teams() {
             selectedDomains={
               data.design?.map((item: any) => item.subdomain) || []
             }
+            
           />
           <div className=" flex justify-center items-center mb-36">
             <Link href="/dashboard">

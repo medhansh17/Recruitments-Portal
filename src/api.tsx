@@ -1,6 +1,6 @@
 "use client";
 import axios from "axios";
-import {Bounce, toast} from "react-toastify";
+import { Bounce, toast } from "react-toastify";
 
 export const PutDomains = async (
   selectedDomains: string[],
@@ -21,9 +21,18 @@ export const PutDomains = async (
       }
     );
     if (response.status === 200) {
-      //add toast here
-
-      toast.success('Successfully submitted', {
+      const data = localStorage.getItem("domains");
+      const domaintoupdate = domain.toLocaleLowerCase();
+      if (data) {
+        const domains = JSON.parse(data);
+        const domainToUpdate = selectedDomains.map((subdomain) => ({
+          subdomain,
+          completed: false,
+        }));
+        domains[domaintoupdate] = domainToUpdate;
+        localStorage.setItem("domains", JSON.stringify(domains));
+      }
+      toast.success("Successfully submitted", {
         position: "bottom-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -34,10 +43,8 @@ export const PutDomains = async (
         theme: "dark",
         transition: Bounce,
       });
-
     } else {
-      //add toast here
-      toast.error('Failed to submit', {
+      toast.error("Failed to submit", {
         position: "bottom-center",
         autoClose: 5000,
         hideProgressBar: false,
