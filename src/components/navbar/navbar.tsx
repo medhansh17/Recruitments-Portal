@@ -82,6 +82,12 @@ export default function Nav() {
                     active={pathname === "/dashboard"}
                     setIsShown={setIsShown}
                   />
+                  <HamNavLink
+                    target="/profile"
+                    text="Profile"
+                    active={pathname === "/profile"}
+                    setIsShown={setIsShown}
+                  />
                   <HamNavLinkLogout
                     text={"Logout"}
                     setIsShown={setIsShown}
