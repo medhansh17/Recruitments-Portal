@@ -74,7 +74,7 @@ export default function Carousel({ questions }: CarouselProps) {
       </motion.button>      
     </section>
 
-      <section className="flex flex-col md:hidden w-screen">
+      <section className="flex flex-col h-full min-h-screen md:hidden w-screen overflow-y-auto">
       {questions.map((faq, index) => (
         <FaqCard key={index} indx={(index+1).toString()} question={faq.question} answer={faq.answer} />
       ))}

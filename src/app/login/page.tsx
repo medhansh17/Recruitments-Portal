@@ -47,6 +47,7 @@ export default function Login() {
         if (response.status === 200) {
           document.cookie = `email=${user.email}; path=/`
           document.cookie = `adminaccessToken=${response.data.token}; path=/`
+          removeLoader()
           router.push("/admin/dashboard");
         }else{
           
@@ -58,9 +59,11 @@ export default function Login() {
             email: user.email
           }).then((response) => {
             if (response.status === 200) {
+              
               //create cookie of user email and response.data.accessToken
               document.cookie = `email=${user.email}; path=/`
               document.cookie = `accessToken=${response.data.accessToken}; path=/`
+              document.cookie = `photoURL=${user.photoURL}; path=/`
               removeLoader()
               router.push("/")
 
@@ -74,7 +77,7 @@ export default function Login() {
                 pauseOnHover: true,
                 draggable: true,
                 progress: undefined,
-                theme: "colored",
+                theme: "dark",
                 transition: Bounce,
               });
 
@@ -91,7 +94,7 @@ export default function Login() {
                 pauseOnHover: true,
                 draggable: true,
                 progress: undefined,
-                theme: "colored",
+                theme: "dark",
                 transition: Bounce,
               });
               removeLoader()
@@ -128,7 +131,7 @@ export default function Login() {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "colored",
+            theme: "dark",
             transition: Bounce,
           });
 
@@ -148,7 +151,7 @@ export default function Login() {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "colored",
+          theme: "dark",
           transition: Bounce,
         });
 

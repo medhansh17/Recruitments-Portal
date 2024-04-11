@@ -52,8 +52,8 @@ export default function Home() {
     checkCookie();
   }, []);
 
-  return (
-    <main className="min-h-screen snap-y snap-mandatory overflow-y-scroll overscroll-behavior-none">
+  return (<>
+    <main className="px-2 min-h-screen overflow-y-scroll">
       <Suspense fallback={<Loading />}>
         <div className="snap-center h-screen">
           <Hero />
@@ -68,7 +68,8 @@ export default function Home() {
           />
         </div>
       </Suspense>
-      <ScrollIndicator />
     </main>
+    <ScrollIndicator/>
+    </>
   );
 }

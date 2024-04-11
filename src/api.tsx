@@ -31,7 +31,7 @@ export const PutDomains = async (
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "colored",
+        theme: "dark",
         transition: Bounce,
       });
 
@@ -45,7 +45,7 @@ export const PutDomains = async (
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "colored",
+        theme: "dark",
         transition: Bounce,
       });
     }
@@ -58,7 +58,7 @@ export const PutDomains = async (
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      theme: "colored",
+      theme: "dark",
       transition: Bounce,
     });
   }

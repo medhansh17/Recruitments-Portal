@@ -32,6 +32,11 @@ export default function Nav() {
     document.cookie = "accessToken=; path=/";
     router.push("/login");
   }
+
+  function handleProfile(){
+    router.push("/profile");
+  }
+
   const toggleNav = () => {
     setIsShown(!isShown);
     if (typeof window !== "undefined" && !isShown) {
@@ -43,7 +48,7 @@ export default function Nav() {
   return (
     <>
       <nav
-        className={` flex flex-row justify-between items-center fixed py-5 w-full z-[31]`}
+        className={`${pathname.startsWith("/admin")?"hidden":"flex"} flex-row justify-between items-center fixed py-5 w-full z-[31]`}
       >
         {isShown && (
           <AnimatePresence>
@@ -77,6 +82,12 @@ export default function Nav() {
                     active={pathname === "/dashboard"}
                     setIsShown={setIsShown}
                   />
+                  <HamNavLink
+                    target="/profile"
+                    text="Profile"
+                    active={pathname === "/profile"}
+                    setIsShown={setIsShown}
+                  />
                   <HamNavLinkLogout
                     text={"Logout"}
                     setIsShown={setIsShown}
@@ -88,11 +99,13 @@ export default function Nav() {
           </AnimatePresence>
         )}
         <div id="logo" className="size-16 ml-[5%] z-[31]">
+          <Link href={`${pathname==="/login"?"/login":"/"}`}>          
             <Image quality={100} src="/logo.svg" alt="IEEECS Logo" width={100} height={100} />
+          </Link>
         </div>
         <button
           className={`${
-            pathname === "/login" || pathname.startsWith("/admin")
+            pathname === "/login"
               ? "hidden"
               : "visible"
           } md:hidden inline-block hamburger hamburger--spring z-[31]`}
@@ -124,21 +137,20 @@ export default function Nav() {
             text="Dashboard"
             active={pathname === "/dashboard"}
           />
-          <Link href="">
-            {/*Update discord link in href above*/}
+          <Link href="https://discord.gg/TzSrx4Hepa">
             <li className="text-white text-2xl mx-5">
               <img src="/discordlogo.svg" alt="Discord Logo"></img>
             </li>
           </Link>
         </ul>
         <div
-          id="logout"
+          id="profile"
           className={`hidden ${
             pathname === "/login" ? "md:hidden" : "md:block"
           } size-14   mr-[5%] hover:cursor-pointer`}
-          onClick={handleSignout}
+          onClick={handleProfile}
         >
-          <Image src="/logout.png" alt="Logout button" width={50} height={50} />
+          <Image src="/profile.png" alt="Profile button" width={50} height={50} />
         </div>
       </nav>
     </>
