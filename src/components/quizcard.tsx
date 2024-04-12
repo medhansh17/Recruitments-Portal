@@ -51,7 +51,8 @@ export default function Quizcard(props: {
       <h2 className="font-sarpanch text-white text-xl">{props.subDomain}</h2>
       <button
         // Uncomment when quizzes are live
-        onClick={() => StartQuiz(props.subDomain)}
+        onClick={() => {!props.completed ?
+          StartQuiz(props.subDomain): null}}
         className="font-sarpanch bg-[#6117AB] text-white rounded-lg p-2 mt-5"
       >
         {/* {"Quiz will be updated soon"} */}
