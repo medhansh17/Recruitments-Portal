@@ -145,7 +145,8 @@ const Question = ({
         >
           prev
         </button>
-        {questionNumber !== 10 ? (
+        {questionNumber !== ansArr.length ? (
+          // change this to array length
           <button
             disabled={questionNumber === 10}
             onClick={() => {
