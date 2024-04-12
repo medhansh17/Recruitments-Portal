@@ -61,6 +61,7 @@ export default function Dashboard() {
         }
       )
       .then((response) => {
+        localStorage.setItem("domains", JSON.stringify(response.data));
         removeLoader();
         setTechsub_pending(
           response.data.tech
