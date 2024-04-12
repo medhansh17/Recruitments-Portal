@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import FaqCard from "./faqcard";
-import Image from 'next/image';
 import Question from './quiz/Question';
 import { motion ,Variants } from "framer-motion";
 
