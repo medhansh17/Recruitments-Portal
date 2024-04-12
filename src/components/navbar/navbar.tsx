@@ -33,7 +33,7 @@ export default function Nav() {
     router.push("/login");
   }
 
-  function handleProfile(){
+  function handleProfile() {
     router.push("/profile");
   }
 
@@ -102,8 +102,14 @@ export default function Nav() {
           </AnimatePresence>
         )}
         <div id="logo" className="size-16 ml-[5%] z-[31]">
-          <Link href={`${pathname==="/login"?"/login":"/"}`}>          
-            <Image quality={100} src="/logo.svg" alt="IEEECS Logo" width={100} height={100} />
+          <Link href={`${pathname === "/login" ? "/login" : "/"}`}>
+            <Image
+              quality={100}
+              src="/logo.svg"
+              alt="IEEECS Logo"
+              width={100}
+              height={100}
+            />
           </Link>
         </div>
         <button
@@ -138,7 +144,7 @@ export default function Nav() {
             text="Dashboard"
             active={pathname === "/dashboard"}
           />
-          <Link href="https://discord.gg/TzSrx4Hepa">
+          <Link href="https://discord.gg/TzSrx4Hepa" target="_blank">
             <li className="text-white text-2xl mx-5">
               <img src="/discordlogo.svg" alt="Discord Logo"></img>
             </li>
@@ -151,7 +157,12 @@ export default function Nav() {
           } size-14   mr-[5%] hover:cursor-pointer`}
           onClick={handleProfile}
         >
-          <Image src="/profile.png" alt="Profile button" width={50} height={50} />
+          <Image
+            src="/profile.png"
+            alt="Profile button"
+            width={50}
+            height={50}
+          />
         </div>
       </nav>
     </>
