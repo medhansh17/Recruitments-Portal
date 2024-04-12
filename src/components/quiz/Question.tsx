@@ -25,8 +25,6 @@ interface OptionData {
 }
 
 const Option = ({ text, ansArr, setAnsArr, questionNumber }: OptionProps) => {
-
-
   return (
     <li
       className={`p-2 bg-[#522481] bg-opacity-50 rounded-xl backdrop-blur-sm border-main-blue border-2 ${
@@ -101,21 +99,23 @@ const Question = ({
       });
     }
     setLoading(true);
-    axios.patch(
-      `https://recruitments-portal-backend.vercel.app/response/submit`,
-      {
-        email: emailValue,
-        domain: JSON.parse(localStorage.getItem("domain") || "").toString(),
-        questions: anwArray,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
+    axios
+      .patch(
+        `https://recruitments-portal-backend.vercel.app/response/submit`,
+        {
+          email: emailValue,
+          domain: JSON.parse(localStorage.getItem("domain") || "").toString(),
+          questions: anwArray,
         },
-      }
-    )
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      )
       .then((_) => {
         setLoading(false);
+        localStorage.removeItem("domains");
         router.push("/dashboard");
       })
       .catch((error) => {
@@ -165,7 +165,7 @@ const Question = ({
           </button>
         )}
       </div>
-      <Loader visibility={loading}/>
+      <Loader visibility={loading} />
     </div>
   );
 };

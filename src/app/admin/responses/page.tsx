@@ -61,7 +61,7 @@ const StudentResponses: React.FC = () => {
         .split("; ")
         .find((row) => row.startsWith("adminaccessToken"))
         ?.split("=")[1];
-      console.log(accessToken);
+
 
       const response = await axios.get(
         `https://recruitments-portal-backend.vercel.app/${domain}`,

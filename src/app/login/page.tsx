@@ -33,10 +33,7 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // Check if the router is available
     if (!router) return;
-
-    // Your router-related logic here
   }, [router]);
 
 
