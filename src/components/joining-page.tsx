@@ -127,6 +127,9 @@ export default function JoinTeam(props: {
               }
             >
               <h1 className={"mb-2"}>Select any 2 subdomains</h1>
+              <h1 className={"mb-2"}>
+                No changes in domain after you attemp quiz
+              </h1>
               <Button
                 text="CONFIRM"
                 onClick={() => {
@@ -148,7 +151,7 @@ export default function JoinTeam(props: {
                       selectedDomains,
                       props.teamName,
                       emailValue,
-                      accessToken,
+                      accessToken
                     );
                   }
                 }}
