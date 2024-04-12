@@ -1,8 +1,15 @@
 "use client";
 import Carousel from "@/components/carousel";
 import Image from "next/image";
+import { useEffect } from "react";
+import {isMobile} from 'is-mobile'
 
 export default function Faq(){
+    useEffect(()=>{
+        if(isMobile()){
+            document.body.style.overflow = "auto";
+        }
+    },[])
 
     const FAQs:Array<{
         question:string,

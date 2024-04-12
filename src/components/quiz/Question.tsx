@@ -124,7 +124,7 @@ const Question = ({
   };
   return (
     <div className="QnA">
-      <h1 className="font-bold font-striger tracking-wider text-xl">
+      <h1 className="font-bold font-sarpanch tracking-wider text-xl md:text-2xl">
         {round1[questionNumber - 1]?.question}
       </h1>
       {round1[questionNumber - 1]?.options.length !== 0 ? (
